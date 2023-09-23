@@ -59,3 +59,13 @@ localhost:8000 -> sesuaikan dengan base url kalian
     "version": "{{version}}"
 }
 ```
+
+# Test Request
+
+```Bash
+
+APP_URL: https://dev-api-halokak.betalogika.tech/
+
+curl --location --request POST 'https://dev-api-halokak.betalogika.tech/oauth/token' \
+
+```
