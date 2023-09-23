@@ -10,7 +10,7 @@ return [
             "host" => env('MONGODB_HOST', '103.145.227.123'),
             "port" => env('MONGODB_PORT', 27017),
             "database" => env('MONGODB_DATABASE', 'halokak'),
-            'option' => [
+            'options' => [
                 'tlsCAFile' => './storage/mongodb-cert.crt'
             ],
         ],
