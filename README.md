@@ -6,19 +6,19 @@
 aktifkan require module php yang dibutukan untuk menjalankan framework tersebut, beberapa modul yang di harus di aktifkan ialah pdo_mysqli, mysqli, xml  dan mbstring 
 </h5>
 
-# composer run
+# Composer Run
 
 ```Bash
 composer install
 ```
 
-# Start Local Development Server Halo Kak
+# Start Server
 
 ```Bash
 php -S localhost:8000 -t public
 ```
 
-# migrate table db
+# Migrate Run
 
 ```Bash
 php artisan migrate
@@ -29,7 +29,7 @@ php artisan migrate:rollback
 
 ```
 
-# seeder
+# Seeder Run
 
 ```Bash
 php artisan db:seed
