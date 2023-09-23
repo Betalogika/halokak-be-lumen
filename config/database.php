@@ -5,11 +5,12 @@ return [
     'migrations' => 'migrations',
     "connections" => [
         "mongodb" => [
-            "driver" => "mongodb",
+            "driver" => env('MONGODB_CONNECTION', 'mongodb'),
             "dsn" => env('MONGODB_URL', 'insert env mongo'),
             "host" => env('MONGODB_HOST', '103.145.227.123'),
             "port" => env('MONGODB_PORT', 27017),
             "database" => env('MONGODB_DATABASE', 'halokak'),
+            'tlsCAFile' => storage_path('mongodb-cert.crt')
         ],
         "mysql" => [
             'driver'    => env('DB_CONNECTION', 'connection db'),
