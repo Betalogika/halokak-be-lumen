@@ -7,8 +7,9 @@ return [
         "mongodb" => [
             "driver" => "mongodb",
             "dsn" => env('MONGODB_URL', 'insert env mongo'),
-            'host' => env('MONGODB_HOST', 'insert port'),
-            "database" => env('MONGODB_DATABASE', 'mongo db'),
+            "host" => env('MONGODB_HOST', '103.145.227.123'),
+            "port" => env('MONGODB_PORT', 27017),
+            "database" => env('MONGODB_DATABASE', 'halokak'),
         ],
         "mysql" => [
             'driver'    => env('DB_CONNECTION', 'connection db'),
