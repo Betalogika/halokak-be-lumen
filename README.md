@@ -26,6 +26,13 @@ php artisan migrate
 php artisan migrate:refresh
 # jika ingin rollback table nya jalan kan perintah di bawah ini
 php artisan migrate:rollback
+
+```
+
+# seeder
+
+```Bash
+php artisan db:seed
 ```
 
 # Endpoint Auth API
@@ -36,7 +43,6 @@ localhost:8000 -> sesuaikan dengan base url kalian
 
 #Login
 {{base_url}}/auth/login ->POST
-
 
 ```
 
