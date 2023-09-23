@@ -66,6 +66,6 @@ localhost:8000 -> sesuaikan dengan base url kalian
 
 APP_URL: https://dev-api-halokak.betalogika.tech/
 
-curl --location --request POST 'https://dev-api-halokak.betalogika.tech/oauth/token' \
+curl --location --request POST 'https://dev-api-halokak.betalogika.tech'
 
 ```
