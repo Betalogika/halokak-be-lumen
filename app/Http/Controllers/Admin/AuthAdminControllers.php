@@ -29,9 +29,22 @@ class AuthAdminControllers extends Controller implements AdminInterface
 
     public function register(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            $result = $this->customError($validator->errors());
+        } else {
+            $result = $this->registerRepositories($request);
+        }
+        return $result;
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
+        return $this->ok($this->logoutRepositories(), 'Successfully Logout');
     }
 }

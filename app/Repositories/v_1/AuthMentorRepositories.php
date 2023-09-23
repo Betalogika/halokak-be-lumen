@@ -4,6 +4,8 @@ namespace App\Repositories\v_1;
 
 use App\Models\Mentor;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 trait AuthMentorRepositories
@@ -31,9 +33,23 @@ trait AuthMentorRepositories
 
     public function registerRepositories($request)
     {
+        DB::beginTransaction();
+        try {
+            $data = $request->only('username', 'email', 'verify', 'password', 'role_id');
+            $data['password'] = Hash::make($request->password);
+            $data['verify'] = 'N';
+            $data['role_id'] = 7;
+            $result = $this->response()->ok(Mentor::create($data), 'Sucessfully Register');
+            DB::commit();
+        } catch (\Exception $error) {
+            DB::rollBack();
+            $result = $this->response()->error($error, 500);
+        }
+        return $result;
     }
 
-    public function logoutRepositories($request)
+    public function logoutRepositories()
     {
+        return Auth::guard('mentor')->user()->token()->delete();
     }
 }

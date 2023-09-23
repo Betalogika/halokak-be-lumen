@@ -2,8 +2,10 @@
 
 namespace App\Repositories\v_1;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 trait AuthUsersRepositories
@@ -31,9 +33,23 @@ trait AuthUsersRepositories
 
     public function registerRepositories($request)
     {
+        DB::beginTransaction();
+        try {
+            $data = $request->only('username', 'email', 'verify', 'password', 'role_id');
+            $data['password'] = Hash::make($request->password);
+            $data['verify'] = 'N';
+            $data['role_id'] = 5;
+            $result = $this->response()->ok(User::create($data), 'Sucessfully Register');
+            DB::commit();
+        } catch (\Exception $error) {
+            DB::rollBack();
+            $result = $this->response()->error($error, 500);
+        }
+        return $result;
     }
 
-    public function logoutRepositories($request)
+    public function logoutRepositories()
     {
+        return Auth::guard('user')->user()->token()->delete();
     }
 }
