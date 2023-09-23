@@ -89,6 +89,7 @@ curl -H 'Authorization: Bearer {{token}}' \
 
 curl -X POST \https://dev-api-halokak.betalogika.tech/api/v1/user/auth/logout => logout user
 curl -X POST \https://dev-api-halokak.betalogika.tech/api/v1/admin/auth/logout => logout admin
+curl -X POST \https://dev-api-halokak.betalogika.tech/api/v1/mentor/auth/logout => logout mentor
 
 
 ```
