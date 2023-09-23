@@ -64,8 +64,33 @@ localhost:8000 -> sesuaikan dengan base url kalian
 
 ```Bash
 
-APP_URL: https://dev-api-halokak.betalogika.tech/
+curl -X GET \https://dev-api-halokak.betalogika.tech => base URL
 
-curl --location --request POST 'https://dev-api-halokak.betalogika.tech'
+#hit login mentor API via body/request params
+
+ curl -H 'Content-Type: application/json' \
+      -d '{ "email":"suryo@gmail.com", "password": "12345"}' \
+      -X POST \
+      https://dev-api-halokak.betalogika.tech/api/v1/mentor/auth/login
+
+#hit login user API via body/request params
+
+ curl -H 'Content-Type: application/json' \
+      -d '{ "email":"suryo@gmail.com", "password": "12345"}' \
+      -X POST \
+      https://dev-api-halokak.betalogika.tech/api/v1/user/auth/login
+
+#hit login admin API via body/request params
+
+ curl -H 'Content-Type: application/json' \
+      -d '{ "email":"suryo@gmail.com", "password": "12345"}' \
+      -X POST \
+      https://dev-api-halokak.betalogika.tech/api/v1/admin/auth/login
+
+
+curl -X POST \https://dev-api-halokak.betalogika.tech/api/v1/mentor/auth/logout => logout mentor
+curl -X POST \https://dev-api-halokak.betalogika.tech/api/v1/user/auth/logout => logout user
+curl -X POST \https://dev-api-halokak.betalogika.tech/api/v1/admin/auth/logout => logout admin
+
 
 ```
