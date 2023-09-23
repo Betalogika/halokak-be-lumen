@@ -84,7 +84,7 @@ $app->middleware([
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
-    'users' => App\Http\Middleware\UsersMiddleware::class,
+    'user' => App\Http\Middleware\UsersMiddleware::class,
     'admin' => App\Http\Middleware\AdminMiddleware::class,
     'mentor' => App\Http\Middleware\MentorMiddleware::class
 ]);

@@ -20,7 +20,7 @@ class UsersSeeders extends Seeder
             'email' => 'samsul.marif100@gmail.com',
             'verify' => 'Y',
             'password' => Hash::make('12345'),
-            'role_id' => 5,
+            'role_id' => 5, //role users
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ]);

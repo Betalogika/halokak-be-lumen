@@ -8,12 +8,12 @@ use App\Interface\ResponseInterface;
 
 class Controller extends BaseController implements ResponseInterface
 {
-    public function ok($data, int $statusCode = 200, string $message = 'Successfully Data')
+    public function ok($data, string $message = 'Successfully Data', int $statusCode = 200)
     {
         return response()->json(['message' => $message, 'data' => $data], $statusCode);
     }
 
-    public function error(int $statusCode = 422, string $message = 'Errors Data')
+    public function error(string $message = 'Errors Data', int $statusCode = 422)
     {
         return response()->json(['message' => $message], $statusCode);
     }

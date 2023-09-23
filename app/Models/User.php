@@ -14,6 +14,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     protected $connection = 'mysql';
 
+    protected $table = 'users';
+
     use HasApiTokens, Authenticatable, Authorizable, HasFactory;
 
     /**

@@ -14,6 +14,8 @@ class Mentor extends Model implements AuthenticatableContract, AuthorizableContr
 {
     protected $connection = 'mysql';
 
+    protected $table = 'users';
+
     use HasApiTokens, Authenticatable, Authorizable, HasFactory;
 
     /**
