@@ -6,7 +6,7 @@ return [
     "connections" => [
         "mongodb" => [
             "driver" => env('MONGODB_CONNECTION', 'mongodb'),
-            "dsn" => env('MONGODB_URL', 'mongodb+srv://betalogika:<password>@clusterbetalogika.ykwqs2g.mongodb.net/?retryWrites=true&w=majority'),
+            "dsn" => env('MONGODB_URL', 'mongodb+srv://betalogika:BetalogikaProject2022@clusterbetalogika.ykwqs2g.mongodb.net/?retryWrites=true&w=majority'),
             "host" => env('MONGODB_HOST', '103.145.227.123'),
             "port" => env('MONGODB_PORT', 27017),
             "database" => env('MONGODB_DATABASE', 'halokak'),
