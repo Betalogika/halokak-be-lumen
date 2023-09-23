@@ -1,24 +1,55 @@
-# Lumen PHP Framework
+# introduce
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+<h5>API halokak di build menggunakan framework lumen versi 8 dengan versi php 8.0, jadi pastikan versi php anda sudah diatas versi >=7, (framework lumen adalah salah satu framwork api dari bahasa pemrograman php) </h5>
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+<h5>
+aktifkan require module php yang dibutukan untuk menjalankan framework tersebut, beberapa modul yang di harus di aktifkan ialah pdo_mysqli, mysqli, xml  dan mbstring 
+</h5>
 
-## Official Documentation
+# composer run
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+```Bash
+composer install
+```
 
-## Contributing
+# Start Local Development Server Halo Kak
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```Bash
+php -S localhost:8000 -t public
+```
 
-## Security Vulnerabilities
+# migrate table db
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+```Bash
+php artisan migrate
+# migrate refresh ketika ada update/perubahan schema column table
+php artisan migrate:refresh
+# jika ingin rollback table nya jalan kan perintah di bawah ini
+php artisan migrate:rollback
+```
 
-## License
+# Endpoint Auth API
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```Bash
+#baseUrl
+localhost:8000 -> sesuaikan dengan base url kalian
+
+#Login
+{{base_url}}/auth/login ->POST
+
+
+```
+
+# Access Ke Endpoint API Yang Menggunakan Session
+
+<h5>jika ingin mengakses api yang menggunakan session, maka anda harus mengirimkan 3 buah object/param seperti dibawah ini, kirim ketiga buah object tersebut melalui request header</h5>
+
+<h5>Object param yang dikirim lewat request header</h5>
+
+```JSON
+{
+    "Authorization": "Bearer {{token}}",
+    "platform": "{{platform}}",
+    "version": "{{version}}"
+}
+```
