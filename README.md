@@ -55,8 +55,8 @@ localhost:8000 -> sesuaikan dengan base url kalian
 ```JSON
 {
     "Authorization": "Bearer {{token}}",
-    "platform": "{{platform}}",
-    "version": "{{version}}"
+    "X-HALOKAK-PLATFORM": "{{platform}}",
+    "X-HALOKAK-VERSION": "{{version}}"
 }
 ```
 
