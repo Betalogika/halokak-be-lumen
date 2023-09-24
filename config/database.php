@@ -6,7 +6,7 @@ return [
     "connections" => [
         "mongodb" => [
             "driver" => env('MONGODB_CONNECTION', 'mongodb'),
-            "dsn" => env('MONGODB_URL', 'mongodb+srv://<username>:<password>@clusterbetalogika.ykwqs2g.mongodb.net/?retryWrites=true&w=majority'),
+            "dsn" => env('MONGODB_URL', 'mongodb+srv://<username>:<password>@<project>.ykwqs2g.mongodb.net/?retryWrites=true&w=majority'),
             "port" => env('MONGODB_PORT', 27017),
             "database" => env('MONGODB_DATABASE', 'halokak'),
         ],
