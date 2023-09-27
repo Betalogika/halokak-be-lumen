@@ -55,8 +55,8 @@ localhost:8000 -> sesuaikan dengan base url kalian
 ```JSON
 {
     "Authorization": "Bearer {{token}}",
-    "platform": "{{platform}}",
-    "version": "{{version}}"
+    "X-HALOKAK-PLATFORM": "{{platform}}",
+    "X-HALOKAK-VERSION": "{{version}}"
 }
 ```
 
@@ -64,8 +64,32 @@ localhost:8000 -> sesuaikan dengan base url kalian
 
 ```Bash
 
-APP_URL: https://dev-api-halokak.betalogika.tech/
+curl -X GET \https://dev-api-halokak.betalogika.tech => base URL
 
-curl --location --request POST 'https://dev-api-halokak.betalogika.tech'
+#hit login API via body/request params
+
+ curl -H 'Content-Type: application/json' \
+      -d '{ "email":"suryo@gmail.com", "password": "12345"}' \
+      -X POST \
+      https://dev-api-halokak.betalogika.tech/api/v1/mentor/auth/login
+
+#hit register API via body/request params
+
+ curl -H 'Content-Type: application/json' \
+      -d '{ "username":"arwan", "email": "arwan_admin@gmail.com", "password": "12345", "password_confirmation": "12345"}' \
+      -X POST \
+      https://dev-api-halokak.betalogika.tech/api/v1/admin/auth/register
+
+#hit logout API
+curl -H 'Authorization: Bearer {{token}}' \
+    -H 'X-HALOKAK-PLATFORM: web' \
+    -H 'X-HALOKAK-VERSION: 1.0.0' \
+    -X POST \
+    https://dev-api-halokak.betalogika.tech/api/v1/user/auth/logout
+
+curl -X POST \https://dev-api-halokak.betalogika.tech/api/v1/user/auth/logout => logout user
+curl -X POST \https://dev-api-halokak.betalogika.tech/api/v1/admin/auth/logout => logout admin
+curl -X POST \https://dev-api-halokak.betalogika.tech/api/v1/mentor/auth/logout => logout mentor
+
 
 ```

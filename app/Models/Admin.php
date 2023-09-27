@@ -14,6 +14,8 @@ class Admin extends Model implements AuthenticatableContract, AuthorizableContra
 {
     protected $connection = 'mysql';
 
+    protected $table = 'users';
+
     use HasApiTokens, Authenticatable, Authorizable, HasFactory;
 
     /**
@@ -22,7 +24,7 @@ class Admin extends Model implements AuthenticatableContract, AuthorizableContra
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'username', 'email', 'verify', 'password', 'role_id'
     ];
 
     /**

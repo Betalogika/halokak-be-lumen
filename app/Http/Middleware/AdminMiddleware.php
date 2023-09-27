@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\PlatformVersion;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class AdminMiddleware
 {
@@ -15,12 +17,22 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        // Pre-Middleware Action
+        // Pre-Middleware Action admin
+        if (Auth::guard('mentor')->user()->role_id != 3) {
+            return response()->json('anda bukan admin', 401);
+        }
 
-        $response = $next($request);
+        if (!$request->header('X-HALOKAK-PLATFORM') || !$request->header('X-HALOKAK-VERSION')) {
+            return response()->json('masukan platform and version', 401);
+        }
 
-        // Post-Middleware Action
+        if (!PlatformVersion::whereplatform($request->header('X-HALOKAK-PLATFORM'))->first()) {
+            return response()->json('platform salah', 401);
+        }
+        if (!PlatformVersion::whereversion($request->header('X-HALOKAK-VERSION'))->first()) {
+            return response()->json('version salah', 401);
+        }
 
-        return $response;
+        return $next($request);
     }
 }

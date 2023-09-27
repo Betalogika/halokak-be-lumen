@@ -2,12 +2,12 @@
 
 return [
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'user',
         'passwords' => 'users',
     ],
 
     'guards' => [
-        'web' => [
+        'user' => [
             'driver' => 'passport',
             'provider' => 'users',
         ],

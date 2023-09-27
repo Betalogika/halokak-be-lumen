@@ -15,11 +15,12 @@ class AdminSeeders extends Seeder
      */
     public function run()
     {
-        DB::table('admin')->insert([
+        DB::table('users')->insert([
             'username' => 'admin',
             'email' => 'admin@gmail.com',
+            'verify' => 'Y',
             'password' => Hash::make('12345'),
-            'role_id' => 3,
+            'role_id' => 3, //role admin
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ]);

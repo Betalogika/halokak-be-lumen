@@ -15,12 +15,12 @@ class MentorSeeders extends Seeder
      */
     public function run()
     {
-        DB::table('mentor')->insert([
+        DB::table('users')->insert([
             'username' => 'suryo',
             'email' => 'suryo@gmail.com',
             'verify' => 'Y',
             'password' => Hash::make('12345'),
-            'role_id' => 7,
+            'role_id' => 7, //role mentor
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ]);
