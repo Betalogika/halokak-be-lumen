@@ -65,6 +65,7 @@ $app->singleton(
 $app->configure('app');
 $app->configure('database');
 $app->configure('auth');
+$app->configure('cors');
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +80,7 @@ $app->configure('auth');
 
 $app->middleware([
     App\Http\Middleware\ExampleMiddleware::class,
-    App\Http\Middleware\CorsMiddleware::class
+    Fruitcake\Cors\HandleCors::class,
 ]);
 
 $app->routeMiddleware([
@@ -106,6 +107,7 @@ $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
+$app->register(\Fruitcake\Cors\CorsServiceProvider::class);
 
 
 /*
