@@ -10,5 +10,5 @@ interface MentorInterface
     public function login(Request $request);
     public function register(Request $request);
     public function logout();
-    public function verify($tokenURL);
+    public function verifyMentor($tokenURL);
 }
