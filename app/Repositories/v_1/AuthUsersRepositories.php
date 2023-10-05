@@ -52,4 +52,8 @@ trait AuthUsersRepositories
     {
         return Auth::guard('user')->user()->token()->delete();
     }
+
+    public function verifyUsersRepositories($tokenURL)
+    {
+    }
 }

@@ -53,7 +53,7 @@ trait AuthMentorRepositories
         return Auth::guard('mentor')->user()->token()->delete();
     }
 
-    public function verifyRepositories($tokenURL)
+    public function verifyMentorRepositories($tokenURL)
     {
     }
 }

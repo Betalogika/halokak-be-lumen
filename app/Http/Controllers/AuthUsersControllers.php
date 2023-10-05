@@ -46,4 +46,9 @@ class AuthUsersControllers extends Controller implements UsersInterface
     {
         return $this->ok($this->logoutRepositories(), 'Successfully Logout');
     }
+
+    public function verifyUsers($tokenURL)
+    {
+        return $this->verifyUsersRepositories($tokenURL);
+    }
 }
