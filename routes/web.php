@@ -25,8 +25,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
 
     $router->group(['prefix' => 'user'], function () use ($router) {
         $router->get('/verify/{tokenURL}/check', 'AuthUsersControllers@checkVerify');
-        $router->post('/forgot/{email}/password', 'AuthUsersControllers@forgotPassword');
-        $router->post('/change/{email}/password', 'AuthUsersControllers@forgotPassword');
+        $router->post('/forgot/password', 'AuthUsersControllers@forgotPassword');
+        $router->post('/change/{tokenURL}/password', 'AuthUsersControllers@changePassword');
         $router->post('/verify/{tokenURL}/account', 'AuthUsersControllers@verifyUsers');
     });
     $router->group(['prefix' => 'mentor'], function () use ($router) {

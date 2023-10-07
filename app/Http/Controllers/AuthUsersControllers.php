@@ -58,13 +58,32 @@ class AuthUsersControllers extends Controller implements UsersInterface
     }
 
 
-    public function forgotPassword($email)
+    public function forgotPassword(Request $request)
     {
-        return $this->forgotPasswordRepositories($email);
+        $validate = Validator::make($request->all(), [
+            'email' => 'email|required',
+        ]);
+
+        if ($validate->fails()) {
+            $result  = $this->customError($validate->errors());
+        } else {
+            $result =  $this->forgotPasswordRepositories($request);
+        }
+        return $result;
     }
 
-    public function changePassword($email)
+    public function changePassword($tokenURL, Request $request)
     {
-        return $this->changePasswordRespositories($email);
+        $validate = Validator::make($request->all(), [
+            'email' => 'email|required',
+            'password_lama' => 'required',
+            'password_baru' => 'required',
+        ]);
+        if ($validate->fails()) {
+            $result = $this->customError($validate->errors());
+        } else {
+            $result = $this->changePasswordRespositories($tokenURL, $request);
+        }
+        return $result;
     }
 }

@@ -11,6 +11,6 @@ interface UsersInterface
     public function logout();
     public function checkVerify($tokenURL);
     public function verifyUsers($tokenURL);
-    public function forgotPassword($tokenURL);
-    public function changePassword($email);
+    public function forgotPassword(Request $request);
+    public function changePassword($tokenURL, Request $request);
 }

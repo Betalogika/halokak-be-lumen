@@ -39,11 +39,11 @@ class Controller extends BaseController implements ResponseInterface
 
     public function urlForgot(forgotPasswords $url)
     {
-        return config('url.dev') . '/forgot/' . $url->token . '/password';
+        return config('url.halokak_dev') . '/auth/forgot/' . $url->token . '/password';
     }
 
     public function urlVerify(verifyAccount $url)
     {
-        return config('url.dev') . '/verify/' . $url->token . '/account';
+        return config('url.halokak_dev') . '/auth/verify/' . $url->token . '/account';
     }
 }
