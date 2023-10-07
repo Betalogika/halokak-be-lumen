@@ -31,7 +31,7 @@ class AuthMentorControllers extends Controller implements MentorInterface
         $validator = Validator::make($request->all(), [
             'username' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|confirmed',
         ]);
 
         if ($validator->fails()) {
@@ -50,5 +50,10 @@ class AuthMentorControllers extends Controller implements MentorInterface
     public function verifyMentor($tokenURL)
     {
         return $this->verifyMentorRepositories($tokenURL);
+    }
+
+    public function forgotPassword($email)
+    {
+        return $this->forgotPasswordRepositories($email);
     }
 }

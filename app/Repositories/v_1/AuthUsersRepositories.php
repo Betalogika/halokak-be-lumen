@@ -3,10 +3,15 @@
 namespace App\Repositories\v_1;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Mail\VerifyAccount as MailVerify;
+use App\Models\RoleModels;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\verifyAccount as ModelVerify;
+use Illuminate\Support\Facades\Mail;
 
 trait AuthUsersRepositories
 {
@@ -39,11 +44,14 @@ trait AuthUsersRepositories
             $data['password'] = Hash::make($request->password);
             $data['verify'] = 'N';
             $data['role_id'] = 5;
-            $result = $this->response()->ok(User::create($data), 'Sucessfully Register');
+            $user = User::create($data);
+            $url = ModelVerify::create(['token' => Str::random(64), 'users_id' => $user->id]); //send to link verify account via email
             DB::commit();
+            Mail::to($user->email)->send(new MailVerify($user, $this->response()->urlVerify($url)));
+            $result = $this->response()->ok($user, 'Sucessfully Register');
         } catch (\Exception $error) {
             DB::rollBack();
-            $result = $this->response()->error($error, 500);
+            $result = $this->response()->error('kesalahan sistem', 500, $error);
         }
         return $result;
     }
@@ -53,7 +61,42 @@ trait AuthUsersRepositories
         return Auth::guard('user')->user()->token()->delete();
     }
 
+    public function checkVerifyRepositories($tokenURL)
+    {
+        try {
+            $token = ModelVerify::wheretoken($tokenURL)->firstOrFail();
+            $user = array(
+                'id' => User::whereId($token->users_id)->first()->id,
+                'username' => User::whereId($token->users_id)->first()->username,
+                'email' => User::whereId($token->users_id)->first()->email,
+                'role_id' => RoleModels::whereId(User::whereId($token->users_id)->first()->role_id)->first(),
+                'verify' => User::whereId($token->users_id)->first()->verify == 'N' ? 'akun belum aktif' : 'akun sudah aktif',
+            );
+            $data = array('id' => $token->id, 'token' => $token->token, 'users' => $user);
+            $result = $this->response()->ok($data);
+        } catch (\Exception $error) {
+            $result = $this->response()->error('token salah', 500, $error);
+        }
+        return $result;
+    }
+
     public function verifyUsersRepositories($tokenURL)
+    {
+        try {
+            $token = ModelVerify::wheretoken($tokenURL)->first();
+            $user = User::whereId($token->users_id)->update(['verify' => 'Y']);
+            $result = $this->response()->ok($user, 'Akun Anda Sudah Aktif silahkan lakukan login');
+        } catch (\Exception $error) {
+            $result = $this->response()->error('token salah', 500, $error);
+        }
+        return $result;
+    }
+
+    public function forgotPasswordRepositories($email)
+    {
+    }
+
+    public function changePasswordRespositories($email)
     {
     }
 }

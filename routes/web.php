@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -20,6 +22,17 @@ $router->get('/', function () use ($router) {
 //(v1)
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
     //public API
+
+    $router->group(['prefix' => 'user'], function () use ($router) {
+        $router->get('/verify/{tokenURL}/check', 'AuthUsersControllers@checkVerify');
+        $router->post('/forgot/{email}/password', 'AuthUsersControllers@forgotPassword');
+        $router->post('/change/{email}/password', 'AuthUsersControllers@forgotPassword');
+        $router->post('/verify/{tokenURL}/account', 'AuthUsersControllers@verifyUsers');
+    });
+    $router->group(['prefix' => 'mentor'], function () use ($router) {
+        $router->get('/forgot/{email}/password', 'AuthMentorControllers@forgotPassword');
+        $router->post('/verify/{tokenURL}/account', 'AuthMentorControllers@verifyMentor');
+    });
     $router->group(['prefix' => 'web', 'namespace' => 'Web'], function () use ($router) {
         $router->group(['prefix' => 'kategori'], function () use ($router) {
             $router->get('/', 'LandingControllers@kategori');

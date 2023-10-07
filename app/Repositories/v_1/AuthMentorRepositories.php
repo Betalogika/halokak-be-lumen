@@ -56,4 +56,8 @@ trait AuthMentorRepositories
     public function verifyMentorRepositories($tokenURL)
     {
     }
+
+    public function forgotPasswordRepositories($email)
+    {
+    }
 }

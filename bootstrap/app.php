@@ -67,6 +67,7 @@ $app->configure('database');
 $app->configure('auth');
 $app->configure('cors');
 $app->configure('mail');
+$app->configure('url');
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +110,7 @@ $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(\Fruitcake\Cors\CorsServiceProvider::class);
+$app->register(Illuminate\Mail\MailServiceProvider::class);
 
 
 /*

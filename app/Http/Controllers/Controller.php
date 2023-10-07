@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 use App\Interface\ResponseInterface;
+use App\Models\verifyAccount;
+use App\Models\forgotPasswords;
 
 class Controller extends BaseController implements ResponseInterface
 {
@@ -13,9 +15,9 @@ class Controller extends BaseController implements ResponseInterface
         return response()->json(['message' => $message, 'data' => $data], $statusCode);
     }
 
-    public function error(string $message = 'Errors Data', int $statusCode = 422)
+    public function error(string $message = 'Errors Data', int $statusCode = 422, String $data = '')
     {
-        return response()->json(['message' => $message], $statusCode);
+        return response()->json(['message' => $message, 'data' => $data], $statusCode);
     }
 
     public function customError($data)
@@ -33,5 +35,15 @@ class Controller extends BaseController implements ResponseInterface
         }
 
         return response()->json(['message' => 'Data tidak lengkap', 'data' => $res], 422);
+    }
+
+    public function urlForgot(forgotPasswords $url)
+    {
+        return config('url.dev') . '/forgot/' . $url->token . '/password';
+    }
+
+    public function urlVerify(verifyAccount $url)
+    {
+        return config('url.dev') . '/verify/' . $url->token . '/account';
     }
 }

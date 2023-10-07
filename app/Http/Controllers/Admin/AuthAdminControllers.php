@@ -32,7 +32,7 @@ class AuthAdminControllers extends Controller implements AdminInterface
         $validator = Validator::make($request->all(), [
             'username' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|confirmed',
         ]);
 
         if ($validator->fails()) {

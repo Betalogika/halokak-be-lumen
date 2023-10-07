@@ -31,7 +31,7 @@ class AuthUsersControllers extends Controller implements UsersInterface
         $validator = Validator::make($request->all(), [
             'username' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|confirmed',
         ]);
 
         if ($validator->fails()) {
@@ -47,8 +47,24 @@ class AuthUsersControllers extends Controller implements UsersInterface
         return $this->ok($this->logoutRepositories(), 'Successfully Logout');
     }
 
+    public function checkVerify($tokenURL)
+    {
+        return $this->checkVerifyRepositories($tokenURL);
+    }
+
     public function verifyUsers($tokenURL)
     {
         return $this->verifyUsersRepositories($tokenURL);
+    }
+
+
+    public function forgotPassword($email)
+    {
+        return $this->forgotPasswordRepositories($email);
+    }
+
+    public function changePassword($email)
+    {
+        return $this->changePasswordRespositories($email);
     }
 }
