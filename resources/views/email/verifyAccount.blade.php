@@ -367,7 +367,7 @@
                 </tr><!-- end tr -->
                 <tr>
                     <td valign="middle" class="hero bg_white" style="padding: 3em 0 2em 0;">
-                        <img src="https://drive.google.com/file/d/1iITgIWmA5WhZqIvhc6zDWMOcJ2SyQF9B/view?usp=sharing"
+                        <img src="https://alibabaspaces.betalogika.tech/img/email.png"
                             alt="img-email" width="100" height="100"
                             style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;">
                     </td>

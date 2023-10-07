@@ -46,14 +46,4 @@ class AuthMentorControllers extends Controller implements MentorInterface
     {
         return $this->ok($this->logoutRepositories(), 'Successfully Logout');
     }
-
-    public function verifyMentor($tokenURL)
-    {
-        return $this->verifyMentorRepositories($tokenURL);
-    }
-
-    public function forgotPassword($email)
-    {
-        return $this->forgotPasswordRepositories($email);
-    }
 }

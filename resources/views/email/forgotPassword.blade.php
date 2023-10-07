@@ -367,8 +367,8 @@
                 </tr><!-- end tr -->
                 <tr>
                     <td valign="middle" class="hero bg_white" style="padding: 3em 0 2em 0;">
-                        <img src="https://drive.google.com/file/d/1iITgIWmA5WhZqIvhc6zDWMOcJ2SyQF9B/view?usp=sharing" alt="img-email"
-                            width="100" height="100"
+                        <img src="https://alibabaspaces.betalogika.tech/img/email.png"
+                            alt="img-email" width="100" height="100"
                             style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;">
                     </td>
                 </tr><!-- end tr -->
@@ -378,10 +378,10 @@
                             <tr>
                                 <td>
                                     <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                        <h4>Halo! Please Click Link On Button For Forgot Password </h4>
-                                        <h4>For Activated Your Account</h4>
+                                        <h4>Halo! Please Click Link On Button </h4>
+                                        <h4>For Forgot Your Account</h4>
                                         <p><a href="{{ $url }}" class="btn btn-primary" target="_blank">Yes!
-                                                Verify</a></p>
+                                                Forgot</a></p>
                                     </div>
                                 </td>
                             </tr>

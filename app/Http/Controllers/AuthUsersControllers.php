@@ -46,44 +46,4 @@ class AuthUsersControllers extends Controller implements UsersInterface
     {
         return $this->ok($this->logoutRepositories(), 'Successfully Logout');
     }
-
-    public function checkVerify($tokenURL)
-    {
-        return $this->checkVerifyRepositories($tokenURL);
-    }
-
-    public function verifyUsers($tokenURL)
-    {
-        return $this->verifyUsersRepositories($tokenURL);
-    }
-
-
-    public function forgotPassword(Request $request)
-    {
-        $validate = Validator::make($request->all(), [
-            'email' => 'email|required',
-        ]);
-
-        if ($validate->fails()) {
-            $result  = $this->customError($validate->errors());
-        } else {
-            $result =  $this->forgotPasswordRepositories($request);
-        }
-        return $result;
-    }
-
-    public function changePassword($tokenURL, Request $request)
-    {
-        $validate = Validator::make($request->all(), [
-            'email' => 'email|required',
-            'password_lama' => 'required',
-            'password_baru' => 'required',
-        ]);
-        if ($validate->fails()) {
-            $result = $this->customError($validate->errors());
-        } else {
-            $result = $this->changePasswordRespositories($tokenURL, $request);
-        }
-        return $result;
-    }
 }

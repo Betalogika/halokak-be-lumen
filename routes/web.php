@@ -21,18 +21,12 @@ $router->get('/', function () use ($router) {
 
 //(v1)
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
-    //public API
-
-    $router->group(['prefix' => 'user'], function () use ($router) {
-        $router->get('/verify/{tokenURL}/check', 'AuthUsersControllers@checkVerify');
-        $router->post('/forgot/password', 'AuthUsersControllers@forgotPassword');
-        $router->post('/change/{tokenURL}/password', 'AuthUsersControllers@changePassword');
-        $router->post('/verify/{tokenURL}/account', 'AuthUsersControllers@verifyUsers');
-    });
-    $router->group(['prefix' => 'mentor'], function () use ($router) {
-        $router->get('/forgot/{email}/password', 'AuthMentorControllers@forgotPassword');
-        $router->post('/verify/{tokenURL}/account', 'AuthMentorControllers@verifyMentor');
-    });
+    //route API verify and forgot
+    $router->get('/verify/{tokenURL}/check', 'VerifyAndForgotPasswordControllers@checkVerify');
+    $router->post('/forgot/password', 'VerifyAndForgotPasswordControllers@forgotPassword');
+    $router->post('/change/{tokenURL}/password', 'VerifyAndForgotPasswordControllers@changePassword');
+    $router->post('/verify/{tokenURL}/account', 'VerifyAndForgotPasswordControllers@verifyUsers');
+    // route api public
     $router->group(['prefix' => 'web', 'namespace' => 'Web'], function () use ($router) {
         $router->group(['prefix' => 'kategori'], function () use ($router) {
             $router->get('/', 'LandingControllers@kategori');

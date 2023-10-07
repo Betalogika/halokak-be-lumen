@@ -52,12 +52,4 @@ trait AuthMentorRepositories
     {
         return Auth::guard('mentor')->user()->token()->delete();
     }
-
-    public function verifyMentorRepositories($tokenURL)
-    {
-    }
-
-    public function forgotPasswordRepositories($email)
-    {
-    }
 }
