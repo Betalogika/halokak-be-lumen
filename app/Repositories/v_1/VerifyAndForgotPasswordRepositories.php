@@ -43,8 +43,8 @@ trait VerifyAndForgotPasswordRepositories
         try {
             $token = ModelVerify::wheretoken($tokenURL)->first();
             $user = User::whereId($token->users_id)->update(['verify' => 'Y']);
+            ModelVerify::wheretoken($tokenURL)->delete();  //after success verify and then delete token verify
             $result = $this->response()->ok($user, 'Akun Anda Sudah Aktif silahkan lakukan login');
-            $token->delete(); //after success verify and then delete token verify
         } catch (\Exception $error) {
             $result = $this->response()->error('token salah', 500, $error);
         }
@@ -71,8 +71,8 @@ trait VerifyAndForgotPasswordRepositories
             if ($request->email != $user->email) return $this->response()->error('email salah'); //check target email yang dijadikan untuk reset password
             if (!Hash::check($request->password_lama, $user->password)) return $this->response()->error('password lama salah'); // check password lama
             $user->update(['password' => Hash::make($request->password_baru)]);
+            forgotPasswords::wheretoken($tokenURL)->delete(); //after delete after success
             return $this->response()->ok($user, 'password berhasil di reset');
-            $token->delete(); //after success delete token forgot password
         } catch (\Exception $error) {
             return $this->response()->error('token salah', 500, $error);
         }
