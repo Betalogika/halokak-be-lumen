@@ -66,6 +66,7 @@ $app->configure('app');
 $app->configure('database');
 $app->configure('auth');
 $app->configure('cors');
+$app->configure('filesystems');
 $app->configure('mail');
 $app->configure('url');
 
@@ -111,6 +112,9 @@ $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(\Fruitcake\Cors\CorsServiceProvider::class);
 $app->register(Illuminate\Mail\MailServiceProvider::class);
+$app->alias('mailer', Illuminate\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 
 
 /*

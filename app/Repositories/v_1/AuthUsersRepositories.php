@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Mail\VerifyAccount as MailVerify;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\verifyAccount as ModelVerify;
@@ -30,7 +31,7 @@ trait AuthUsersRepositories
         } else if ($user->role_id != 5) {
             $result = $this->response()->error('login ini khusus untuk user, dan anda bukan user');
         } else {
-            $result = $this->response()->ok(array('user' => $user, 'token' => $user->createToken('halokak')->accessToken), 'Succesfully Login');
+            $result = $this->response()->ok(array('user' => $user, 'profile' => Profile::whereusers_id($user->id)->first(), 'token' => $user->createToken('halokak')->accessToken), 'Succesfully Login');
         }
         return $result;
     }
@@ -58,5 +59,29 @@ trait AuthUsersRepositories
     public function logoutRepositories()
     {
         return Auth::guard('user')->user()->token()->delete();
+    }
+
+    public function profileRepositories()
+    {
+        return $this->response()->ok(Profile::whereusers_id(Auth::guard('user')->user()->id)->first(), 'Successfully Data Profiles');
+    }
+
+    public function updateOrCreateRepositories($data)
+    {
+        DB::beginTransaction();
+        try {
+            if (isset($data['photo'])) $data['photo'] = $this->response()->imageToUrl($data['photo']);
+            $data['users_id'] = Auth::guard('user')->user()->id;
+            // Profile::updateOrCreate(
+            //     ['users_id' => Auth::guard('user')->user()->id],
+            //     $data,
+            // );
+            dd($data);
+            // DB::commit();
+            return $this->response()->ok($data, 'Successfully Create Photo Profiles');
+        } catch (\Exception $errors) {
+            DB::rollBack();
+            return $this->response()->error($errors);
+        }
     }
 }
