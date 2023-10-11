@@ -47,7 +47,7 @@ trait AuthUsersRepositories
             $url = ModelVerify::create(['token' => Str::random(64), 'users_id' => $user->id]); //send to link verify account via email
             DB::commit();
             Mail::to($user->email)->send(new MailVerify($user, $this->response()->urlVerify($url)));
-            $result = $this->response()->ok($user, 'Sucessfully Register');
+            $result = $this->response()->ok($user, 'Sucessfully Register Users');
         } catch (\Exception $error) {
             DB::rollBack();
             $result = $this->response()->error('kesalahan sistem', 500, $error);
