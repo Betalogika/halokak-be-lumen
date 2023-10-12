@@ -49,7 +49,6 @@ return [
             'username' => env('SFTP_USERNAME'),
             'password' => env('SFTP_PASSWORD'),
             'root' => env('SFTP_ROOT'),
-            'port' => env('SFTP_PORT'),
             'prefix' => env('SFTP_PREFIX', 'https://sftp-prefix.com'),
         ],
 
