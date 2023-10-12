@@ -78,10 +78,10 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
             });
         });
         $router->group(['middleware' => ['auth:mentor', 'mentor']], function () use ($router) {
-            $router->group(['prefix' => 'fitur-mentor'], function () use ($router) {
-                $router->post('/', function () {
-                    return 'welcome feat mentor';
-                });
+            $router->group(['prefix' => 'room'], function () use ($router) {
+                $router->get('/', 'MentorshipControllers@room');
+                $router->post('/', 'MentorshipControllers@createRoom');
+                $router->post('/message', 'MentorshipControllers@sendMessageRoom');
             });
         });
     });

@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Models\verifyAccount as ModelVerify;
 use App\Mail\VerifyAccount as MailVerify;
-
-
+use App\Models\Profile;
 
 trait AuthMentorRepositories
 {
@@ -32,7 +31,7 @@ trait AuthMentorRepositories
         } else if ($user->role_id != 7) {
             $result = $this->response()->error('login ini khusus untuk mentor, dan anda bukan mentor');
         } else {
-            $result = $this->response()->ok(array('user' => $user, 'token' => $user->createToken('halokak')->accessToken), 'Succesfully Login');
+            $result = $this->response()->ok(array('user' => $user, 'profile' => Profile::whereusers_id($user->id)->first(), 'token' => $user->createToken('halokak')->accessToken), 'Succesfully Login');
         }
         return $result;
     }
