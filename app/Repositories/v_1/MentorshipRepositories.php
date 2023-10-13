@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\RoomResource;
 use App\Models\Mentorship;
 use App\Models\MessageRoom;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -32,7 +33,7 @@ trait MentorshipRepositories
         if ($limit >= $request->limit) {
             $limit = $request->limit;
         }
-        $data = Mentorship::whereusers_id(Auth::guard('mentor')->user()->id)
+        $data = Mentorship::where('mentor_user_id.id', Auth::guard('mentor')->user()->id)
             ->when($request->code, function ($query) use ($request) {
                 return $query->where('code', 'like', "%{$request->code}%");
             })->when($request->title, function ($query) use ($request) {
@@ -48,15 +49,18 @@ trait MentorshipRepositories
     public function createRoomRepostiories($request)
     {
         try {
-            $submitRoom = $request->only('title', 'code', 'desc', 'mentor_user_id');
+            $submitRoom = $request->only('title', 'code', 'desc', 'mentor_user_id', 'status');
             $submitRoom['code'] = $this->codeRoom();
-            $submitRoom['mentor_user_id'] = array('id' => Auth::guard('mentor')->user()->id, 'name' => Auth::guard('mentor')->user()->username);
-            dd($submitRoom);
+            $submitRoom['mentor_user_id'] = array(
+                'id' => Auth::guard('mentor')->user()->id,
+                'nama' => Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first()->nama_lengkap,
+                'photo' =>  Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first()->photo,
+            );
+            Mentorship::create($submitRoom);
+            return $this->response()->ok($submitRoom, 'Successfully Create Room');
         } catch (\Exception $error) {
             return $this->response()->error($error);
         }
-        // Mentorship::create($submitRoom);
-        // return $this->response()->ok($submitRoom, 'Successfully Create Room');
     }
 
     public function sendMessageRoomRepostiories($request)
