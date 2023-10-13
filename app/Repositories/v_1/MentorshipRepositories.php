@@ -42,16 +42,21 @@ trait MentorshipRepositories
             })
             ->orderByDesc('_id')
             ->paginate($limit);
-        return RoomResource::collection($data);
+        return $data;
     }
 
     public function createRoomRepostiories($request)
     {
-        $submitRoom = $request->only('title', 'code', 'desc', 'users_id');
-        $submitRoom['code'] = $this->codeRoom();
-        $submitRoom['users_id'] = Auth::guard('mentor')->user()->id;
-        Mentorship::create($submitRoom);
-        return $this->response()->ok($submitRoom, 'Successfully Create Room');
+        try {
+            $submitRoom = $request->only('title', 'code', 'desc', 'mentor_user_id');
+            $submitRoom['code'] = $this->codeRoom();
+            $submitRoom['mentor_user_id'] = array('id' => Auth::guard('mentor')->user()->id, 'name' => Auth::guard('mentor')->user()->username);
+            dd($submitRoom);
+        } catch (\Exception $error) {
+            return $this->response()->error($error);
+        }
+        // Mentorship::create($submitRoom);
+        // return $this->response()->ok($submitRoom, 'Successfully Create Room');
     }
 
     public function sendMessageRoomRepostiories($request)

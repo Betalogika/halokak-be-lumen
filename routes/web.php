@@ -83,6 +83,10 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
                 $router->post('/', 'MentorshipControllers@createRoom');
                 $router->post('/message', 'MentorshipControllers@sendMessageRoom');
             });
+            $router->group(['prefix' => 'profile'], function () use ($router) {
+                $router->get('/', 'AuthMentorControllers@profile');
+                $router->post('/', 'AuthMentorControllers@updateOrCreate');
+            });
         });
     });
 

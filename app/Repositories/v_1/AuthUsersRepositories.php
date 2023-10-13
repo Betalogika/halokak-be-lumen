@@ -3,15 +3,16 @@
 namespace App\Repositories\v_1;
 
 use App\Models\User;
+use App\Models\Profile;
+use App\Models\RoleModels;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Mail\VerifyAccount as MailVerify;
-use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\verifyAccount as ModelVerify;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyAccount as MailVerify;
+use App\Models\verifyAccount as ModelVerify;
 
 trait AuthUsersRepositories
 {
@@ -31,7 +32,17 @@ trait AuthUsersRepositories
         } else if ($user->role_id != 5) {
             $result = $this->response()->error('login ini khusus untuk user, dan anda bukan user');
         } else {
-            $result = $this->response()->ok(array('user' => $user, 'profile' => Profile::whereusers_id($user->id)->first(), 'token' => $user->createToken('halokak')->accessToken), 'Succesfully Login');
+            $dataUser = array(
+                'id' => $user->id,
+                'username' => $user->username,
+                'email' => $user->email,
+                'status' => $user->verify == 'Y' ? 'aktif' : 'inactive',
+                'role_id' => RoleModels::whereId($user->role_id)->first(),
+                'profile' => Profile::whereusers_id($user->id)->first(),
+                'created_at' => $user->created_at,
+                'updated_at' => $user->updated_at,
+            );
+            $result = $this->response()->ok(array('user' => $dataUser, 'token' => $user->createToken('halokak')->accessToken), 'Succesfully Login');
         }
         return $result;
     }
@@ -70,14 +81,17 @@ trait AuthUsersRepositories
     {
         DB::beginTransaction();
         try {
-            if (isset($data['photo'])) $data['photo'] = $this->response()->imageToUrl($data['photo']);
+            if (isset($data['photo'])) {
+                $data['photo'] = $this->response()->imageToUrl($data['photo']); // upload foto real
+            } else {
+                $data['photo'] = 'https://alibabaspaces.betalogika.tech/img/imgdef.png'; //photo default if not upload real photos
+            }
             $data['users_id'] = Auth::guard('user')->user()->id;
-            // Profile::updateOrCreate(
-            //     ['users_id' => Auth::guard('user')->user()->id],
-            //     $data,
-            // );
-            dd($data);
-            // DB::commit();
+            Profile::updateOrCreate(
+                ['users_id' => Auth::guard('user')->user()->id],
+                $data,
+            );
+            DB::commit();
             return $this->response()->ok($data, 'Successfully Create Photo Profiles');
         } catch (\Exception $errors) {
             DB::rollBack();
