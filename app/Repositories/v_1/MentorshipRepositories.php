@@ -48,17 +48,24 @@ trait MentorshipRepositories
 
     public function createRoomRepostiories($request)
     {
+        DB::beginTransaction();
         try {
             $submitRoom = $request->only('title', 'code', 'desc', 'mentor_user_id', 'status');
             $submitRoom['code'] = $this->codeRoom();
-            $submitRoom['mentor_user_id'] = array(
-                'id' => Auth::guard('mentor')->user()->id,
-                'nama' => Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first()->nama_lengkap,
-                'photo' =>  Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first()->photo,
-            );
+            if (!$profile = Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first()) {
+                return $this->response()->error('profile belum ada');
+            } else {
+                $submitRoom['mentor_user_id'] = array(
+                    'id' => Auth::guard('mentor')->user()->id,
+                    'nama' => $profile->nama_lengkap,
+                    'photo' => $profile->photo,
+                );
+            }
             Mentorship::create($submitRoom);
+            DB::commit();
             return $this->response()->ok($submitRoom, 'Successfully Create Room');
         } catch (\Exception $error) {
+            DB::rollBack();
             return $this->response()->error($error);
         }
     }
