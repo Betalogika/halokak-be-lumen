@@ -5,6 +5,7 @@ namespace App\Repositories\v_1;
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use App\Models\Mentorship;
+use App\Models\MessageRoom;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\MessageRoomMentee;
@@ -15,7 +16,20 @@ trait MenteeRepositories
     {
         return new Controller;
     }
-    public function chatRoomRepositories($request)
+
+    public function chatRoomRepositories($idRoom, $request)
+    {
+        $data = MessageRoom::wherecode($idRoom)
+            ->when($request->message, function ($query) use ($request) {
+                return $query->where('message', 'like', "%{$request->message}%");
+            })
+            ->orderByDesc('_id')
+            ->paginate($this->response()->pagination($request));
+
+        return $data;
+    }
+
+    public function sendChatRoomRepositories($request)
     {
         DB::beginTransaction();
         try {

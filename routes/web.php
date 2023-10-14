@@ -66,7 +66,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
                 $router->post('/', 'AuthUsersControllers@updateOrCreate');
             });
             $router->group(['prefix' => 'room'], function () use ($router) {
-                $router->post('/message', 'MenteeController@chatRoom');
+                $router->post('/message', 'MenteeController@sendChatRoom');
+                $router->post('/{idRoom}/message', 'MenteeController@chatRoom');
             });
         });
     });
@@ -85,6 +86,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
                 $router->get('/', 'MentorshipControllers@room');
                 $router->post('/', 'MentorshipControllers@createRoom');
                 $router->post('/message', 'MentorshipControllers@sendMessageRoom');
+                $router->post('/{idRoom}/message', 'MentorshipControllers@chatRoom');
             });
             $router->group(['prefix' => 'profile'], function () use ($router) {
                 $router->get('/', 'AuthMentorControllers@profile');
