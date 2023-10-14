@@ -44,9 +44,9 @@ trait VerifyAndForgotPasswordRepositories
     {
         try {
             $token = ModelVerify::wheretoken($tokenURL)->first();
-            $user = User::whereId($token->users_id)->update(['verify' => 'Y']);
+            User::whereId($token->users_id)->update(['verify' => 'Y']);
             ModelVerify::wheretoken($tokenURL)->delete();  //after success verify and then delete token verify
-            $result = $this->response()->ok($user, 'Akun Anda Sudah Aktif silahkan lakukan login');
+            $result = $this->response()->ok(User::whereId($token->users_id)->first(), 'Akun Anda Sudah Aktif silahkan lakukan login');
         } catch (\Exception $error) {
             $result = $this->response()->error('token salah', 500, $error);
         }
