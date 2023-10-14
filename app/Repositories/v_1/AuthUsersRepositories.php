@@ -37,12 +37,13 @@ trait AuthUsersRepositories
                 'username' => $user->username,
                 'email' => $user->email,
                 'status' => $user->verify == 'Y' ? 'aktif' : 'inactive',
-                'role_id' => RoleModels::whereId($user->role_id)->first(),
+                'role' => RoleModels::whereId($user->role_id)->first(),
                 'profile' => Profile::whereusers_id($user->id)->first(),
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
+                'token' =>  $user->createToken('halokak')->accessToken,
             );
-            $result = $this->response()->ok(array('user' => $dataUser, 'token' => $user->createToken('halokak')->accessToken), 'Succesfully Login');
+            $result = $this->response()->ok($dataUser, 'Succesfully Login');
         }
         return $result;
     }
