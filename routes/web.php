@@ -65,6 +65,9 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
                 $router->get('/', 'AuthUsersControllers@profile');
                 $router->post('/', 'AuthUsersControllers@updateOrCreate');
             });
+            $router->group(['prefix' => 'room'], function () use ($router) {
+                $router->post('/message', 'MenteeController@chatRoom');
+            });
         });
     });
 
