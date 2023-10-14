@@ -27,11 +27,13 @@ trait VerifyAndForgotPasswordRepositories
                 'id' => User::whereId($token->users_id)->first()->id,
                 'username' => User::whereId($token->users_id)->first()->username,
                 'email' => User::whereId($token->users_id)->first()->email,
-                'role_id' => RoleModels::whereId(User::whereId($token->users_id)->first()->role_id)->first(),
                 'verify' => User::whereId($token->users_id)->first()->verify == 'N' ? 'akun belum aktif' : 'akun sudah aktif',
+                'created_at' => User::whereId($token->users_id)->first()->created_at,
+                'updated_at' => User::whereId($token->users_id)->first()->updated_at,
+                'role' => RoleModels::whereId(User::whereId($token->users_id)->first()->role_id)->first(),
+                'token' => $token->token,
             );
-            $data = array('id' => $token->id, 'token' => $token->token, 'users' => $user);
-            $result = $this->response()->ok($data);
+            $result = $this->response()->ok($user);
         } catch (\Exception $error) {
             $result = $this->response()->error('token salah', 500, $error);
         }
