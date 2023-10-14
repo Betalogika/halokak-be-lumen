@@ -74,9 +74,17 @@ trait MentorshipRepositories
     {
         DB::beginTransaction();
         try {
-            $submitMessage = $request->only('code', 'users_id', 'message');
+            $submitMessage = $request->only('code', 'mentor_user_id', 'message');
             if (!Mentorship::wherecode($request->code)->first()) return $this->response()->error('code room tidak di temukan');
-            $submitMessage['users_id'] = Auth::guard('mentor')->user()->id;
+            if (!$profile = Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first()) {
+                return $this->response()->error('profile belum ada');
+            } else {
+                $submitMessage['mentor_user_id'] = array(
+                    'id' => Auth::guard('mentor')->user()->id,
+                    'nama' => $profile->nama_lengkap,
+                    'photo' => $profile->photo,
+                );
+            }
             MessageRoom::create($submitMessage);
             DB::commit();
             return $this->response()->ok($submitMessage, 'berhasil kirim message');

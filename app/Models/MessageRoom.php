@@ -10,7 +10,7 @@ class MessageRoom extends Model
 
     protected $table = 'chatroom';
 
-    protected $fillable = ['message', 'code', 'users_id'];
+    protected $fillable = ['message', 'code', 'mentor_user_id'];
 
     protected $hidden = ['_id'];
 }
