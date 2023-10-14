@@ -6,6 +6,7 @@ use App\Models\Mentor;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProfileResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -37,7 +38,7 @@ trait AuthMentorRepositories
                 'username' => $user->username,
                 'email' => $user->email,
                 'status' => $user->verify == 'Y' ? 'aktif' : 'inactive',
-                'role_id' => RoleModels::whereId($user->role_id)->first(),
+                'role' => RoleModels::whereId($user->role_id)->first(),
                 'profile' => Profile::whereusers_id($user->id)->first(),
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
@@ -75,10 +76,10 @@ trait AuthMentorRepositories
 
     public function profileRepositories()
     {
-        return $this->response()->ok(Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first(), 'Successfully Data Profiles');
+        return $this->response()->ok(new ProfileResource(Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first()), 'Successfully Data Profiles');
     }
 
-    public function updateOrCreateRepositories($data)
+    public function ProfileUpdateOrCreateRepositories($data)
     {
         DB::beginTransaction();
         try {

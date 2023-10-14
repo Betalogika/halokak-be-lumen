@@ -63,7 +63,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         $router->group(['middleware' => ['auth:user', 'user']], function () use ($router) {
             $router->group(['prefix' => 'profile'], function () use ($router) {
                 $router->get('/', 'AuthUsersControllers@profile');
-                $router->post('/', 'AuthUsersControllers@updateOrCreate');
+                $router->post('/', 'AuthUsersControllers@updateOrCreateProfile');
             });
             $router->group(['prefix' => 'room'], function () use ($router) {
                 $router->post('/message', 'MenteeController@sendChatRoom');
@@ -90,7 +90,7 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
             });
             $router->group(['prefix' => 'profile'], function () use ($router) {
                 $router->get('/', 'AuthMentorControllers@profile');
-                $router->post('/', 'AuthMentorControllers@updateOrCreate');
+                $router->post('/', 'AuthMentorControllers@updateOrCreateProfile');
             });
         });
     });

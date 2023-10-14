@@ -52,23 +52,23 @@ class AuthMentorControllers extends Controller implements MentorInterface
         return $this->profileRepositories();
     }
 
-    public function updateOrCreate(Request $request)
+    public function updateOrCreateProfile(Request $request)
     {
         $data = $request->all();
         $validate = Validator::make($data, [
             'nama_lengkap' => 'required|string',
-            'nama_panggilan' => 'required|string',
+            'nama_panggilan' => 'string|string',
             'tanggal_lahir' => 'required|date_format:Y-m-d',
-            'tempat_lahir' => 'required',
-            'negara' => 'required',
-            'provinsi' => 'required',
-            'kecamatan' => 'required',
-            'kota_kabupaten' => 'required',
-            'alamat_lengkap' => 'required',
-            'umur' => 'required|integer',
-            'universitas' => 'required',
-            'fakultas' => 'required',
-            'jurusan' => 'required',
+            'tempat_lahir' => 'string',
+            'negara' => 'string',
+            'provinsi' => 'string',
+            'kecamatan' => 'string',
+            'kota_kabupaten' => 'string',
+            'alamat_lengkap' => 'string',
+            'umur' => 'string|integer',
+            'universitas' => 'string',
+            'fakultas' => 'string',
+            'jurusan' => 'string',
             'gelar_depan' => 'string',
             'gelar_belakang' => 'string',
             'about' => 'string',
@@ -78,7 +78,7 @@ class AuthMentorControllers extends Controller implements MentorInterface
         if ($validate->fails()) {
             $result = $this->customError($validate->errors());
         } else {
-            $result = $this->updateOrCreateRepositories($data);
+            $result = $this->ProfileUpdateOrCreateRepositories($data);
         }
         return $result;
     }

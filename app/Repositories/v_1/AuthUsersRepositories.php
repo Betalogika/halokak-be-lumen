@@ -8,6 +8,7 @@ use App\Models\RoleModels;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProfileResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -75,10 +76,10 @@ trait AuthUsersRepositories
 
     public function profileRepositories()
     {
-        return $this->response()->ok(Profile::whereusers_id(Auth::guard('user')->user()->id)->first(), 'Successfully Data Profiles');
+        return $this->response()->ok(new ProfileResource(Profile::whereusers_id(Auth::guard('user')->user()->id)->first()), 'Successfully Data Profiles');
     }
 
-    public function updateOrCreateRepositories($data)
+    public function ProfileUpdateOrCreateRepositories($data)
     {
         DB::beginTransaction();
         try {
