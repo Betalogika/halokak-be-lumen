@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -19,7 +21,12 @@ $router->get('/', function () use ($router) {
 
 //(v1)
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
-    //public API
+    //route API verify and forgot
+    $router->get('/verify/{tokenURL}/check', 'VerifyAndForgotPasswordControllers@checkVerify');
+    $router->post('/forgot/password', 'VerifyAndForgotPasswordControllers@forgotPassword');
+    $router->post('/change/{tokenURL}/password', 'VerifyAndForgotPasswordControllers@changePassword');
+    $router->post('/verify/{tokenURL}/account', 'VerifyAndForgotPasswordControllers@verifyUsers');
+    // route api public
     $router->group(['prefix' => 'web', 'namespace' => 'Web'], function () use ($router) {
         $router->group(['prefix' => 'kategori'], function () use ($router) {
             $router->get('/', 'LandingControllers@kategori');
@@ -54,10 +61,9 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
             });
         });
         $router->group(['middleware' => ['auth:user', 'user']], function () use ($router) {
-            $router->group(['prefix' => 'fitur-user'], function () use ($router) {
-                $router->post('/', function () {
-                    return 'welcome feat user';
-                });
+            $router->group(['prefix' => 'profile'], function () use ($router) {
+                $router->get('/', 'AuthUsersControllers@profile');
+                $router->post('/', 'AuthUsersControllers@updateOrCreate');
             });
         });
     });

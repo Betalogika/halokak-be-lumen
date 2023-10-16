@@ -4,7 +4,6 @@ namespace App\Interface;
 
 use Illuminate\Http\Request;
 
-
 interface MentorInterface
 {
     public function login(Request $request);

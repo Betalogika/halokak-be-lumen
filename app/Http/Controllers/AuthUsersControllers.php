@@ -31,7 +31,7 @@ class AuthUsersControllers extends Controller implements UsersInterface
         $validator = Validator::make($request->all(), [
             'username' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|confirmed',
         ]);
 
         if ($validator->fails()) {
@@ -45,5 +45,41 @@ class AuthUsersControllers extends Controller implements UsersInterface
     public function logout()
     {
         return $this->ok($this->logoutRepositories(), 'Successfully Logout');
+    }
+
+    public function profile()
+    {
+        return $this->profileRepositories();
+    }
+
+    public function updateOrCreate(Request $request)
+    {
+        $data = $request->all();
+        $validate = Validator::make($data, [
+            'nama_lengkap' => 'required|string',
+            'nama_panggilan' => 'required|string',
+            'tanggal_lahir' => 'required|date_format:Y-m-d',
+            'tempat_lahir' => 'required',
+            'negara' => 'required',
+            'provinsi' => 'required',
+            'kecamatan' => 'required',
+            'kota_kabupaten' => 'required',
+            'alamat_lengkap' => 'required',
+            'umur' => 'required|integer',
+            'universitas' => 'required',
+            'fakultas' => 'required',
+            'jurusan' => 'required',
+            'gelar_depan' => 'string',
+            'gelar_belakang' => 'string',
+            'about' => 'string',
+            'photo' => 'string',
+        ]);
+
+        if ($validate->fails()) {
+            $result = $this->customError($validate->errors());
+        } else {
+            $result = $this->updateOrCreateRepositories($data);
+        }
+        return $result;
     }
 }

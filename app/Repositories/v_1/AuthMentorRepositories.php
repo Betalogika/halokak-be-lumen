@@ -3,10 +3,16 @@
 namespace App\Repositories\v_1;
 
 use App\Models\Mentor;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Models\verifyAccount as ModelVerify;
+use App\Mail\VerifyAccount as MailVerify;
+
+
 
 trait AuthMentorRepositories
 {
@@ -39,8 +45,11 @@ trait AuthMentorRepositories
             $data['password'] = Hash::make($request->password);
             $data['verify'] = 'N';
             $data['role_id'] = 7;
-            $result = $this->response()->ok(Mentor::create($data), 'Sucessfully Register');
+            $mentor = Mentor::create($data);
+            $url = ModelVerify::create(['token' => Str::random(64), 'users_id' => $mentor->id]); //send to link verify account via email
             DB::commit();
+            Mail::to($mentor->email)->send(new MailVerify($mentor, $this->response()->urlVerify($url)));
+            $result = $this->response()->ok($mentor, 'Sucessfully Register Mentor');
         } catch (\Exception $error) {
             DB::rollBack();
             $result = $this->response()->error($error, 500);

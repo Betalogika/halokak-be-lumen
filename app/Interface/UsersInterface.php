@@ -9,4 +9,6 @@ interface UsersInterface
     public function login(Request $request);
     public function register(Request $request);
     public function logout();
+    public function profile();
+    public function updateOrCreate(Request $request);
 }
