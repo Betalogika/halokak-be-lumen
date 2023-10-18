@@ -58,12 +58,12 @@ trait MentorshipRepositories
     {
         DB::beginTransaction();
         try {
-            $submitRoom = $request->only('title', 'code', 'desc', 'mentor_user_id', 'status');
+            $submitRoom = $request->only('title', 'code', 'desc', 'mentor', 'status');
             $submitRoom['code'] = $this->codeRoom();
             if (!$profile = Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first()) {
                 return $this->response()->error('profile belum ada');
             } else {
-                $submitRoom['mentor_user_id'] = array(
+                $submitRoom['mentor'] = array(
                     'id' => Auth::guard('mentor')->user()->id,
                     'nama' => $profile->nama_lengkap,
                     'photo' => $profile->photo,
@@ -87,7 +87,7 @@ trait MentorshipRepositories
             if (!$profile = Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first()) {
                 return $this->response()->error('profile belum ada');
             } else {
-                $submitMessage['mentor_user_id'] = array(
+                $submitMessage['mentor'] = array(
                     'id' => Auth::guard('mentor')->user()->id,
                     'nama' => $profile->nama_lengkap,
                     'photo' => $profile->photo,

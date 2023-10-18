@@ -11,6 +11,10 @@ class MenteeController extends Controller implements MenteeInterface
 {
     use MenteeRepositories;
 
+    public function listMentor(Request $request)
+    {
+    }
+
     public function chatRoom($idRoom, Request $request)
     {
         if (!Mentorship::wherecode($idRoom)->first()) return $this->error('code room tidak di temukan');
