@@ -84,10 +84,8 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         });
         $router->group(['middleware' => ['auth:mentor', 'mentor']], function () use ($router) {
             $router->group(['prefix' => 'room'], function () use ($router) {
-                $router->get('/', 'MentorshipControllers@room');
-                $router->post('/', 'MentorshipControllers@createRoom');
+                $router->post('/chatmessage', 'MentorshipControllers@listRoomMessage');
                 $router->post('/message', 'MentorshipControllers@sendMessageRoom');
-                $router->post('/{idRoom}/message', 'MentorshipControllers@chatRoom');
             });
             $router->group(['prefix' => 'profile'], function () use ($router) {
                 $router->get('/', 'AuthMentorControllers@profile');
