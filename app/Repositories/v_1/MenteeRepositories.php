@@ -65,7 +65,8 @@ trait MenteeRepositories
                 return $this->response()->error('mentor tidak ditemukan');
             } else {
                 if (!$userProfile = Profile::whereusers_id(Auth::guard('user')->user()->id)->first()) return $this->response()->error('profile belum ada');
-                // check if has make room/ruang chat or tidak
+                // check if sudah hubungi mentor sebelumnya maka pake room sebelumnya
+                // akan tetapi jika belum maka create room baru
                 if ($mentee = Mentorship::where([
                     ['mentee.id', '=', Auth::guard('user')->user()->id],
                     ['mentor.id', '=', $mentor->id]
