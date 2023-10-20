@@ -10,7 +10,7 @@ class Mentorship extends Model
 
     protected $table = 'room';
 
-    protected $fillable = ['title', 'desc', 'code', 'mentor', 'status'];
+    protected $fillable = ['title', 'desc', 'code', 'mentor', 'status', 'mentee'];
 
     protected $hidden = ['_id'];
 }

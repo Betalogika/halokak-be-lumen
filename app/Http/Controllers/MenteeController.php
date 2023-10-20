@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\v_1\MenteeRepositories;
 use App\Interface\MenteeInterface;
 use App\Models\Mentorship;
+use Illuminate\Support\Facades\Validator;
 
 class MenteeController extends Controller implements MenteeInterface
 {
@@ -22,8 +23,19 @@ class MenteeController extends Controller implements MenteeInterface
         return $this->chatRoomRepositories($idRoom, $request);
     }
 
-    public function sendChatRoom(Request $request)
+    public function chatmentor(Request $request)
     {
-        return $this->sendChatRoomRepositories($request);
+        $validator = Validator::make($request->all(), [
+            'mentor_user_id' => 'int|required',
+            'message' => 'string|required',
+        ]);
+
+        if ($validator->fails()) {
+            $result = $this->customError($validator->errors());
+        } else {
+            $result = $this->sendChatMentorRepositories($request);
+        }
+
+        return $result;
     }
 }

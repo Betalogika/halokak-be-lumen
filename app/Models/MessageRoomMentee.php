@@ -10,7 +10,7 @@ class MessageRoomMentee extends Model
 
     protected $table = 'chatroom';
 
-    protected $fillable = ['message', 'code', 'mentee_user_id', 'created_at', 'updated_at'];
+    protected $fillable = ['message', 'code', 'mentee', 'created_at', 'updated_at'];
 
     protected $hidden = ['_id'];
 }

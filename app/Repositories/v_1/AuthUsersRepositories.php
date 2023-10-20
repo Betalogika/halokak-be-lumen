@@ -76,7 +76,12 @@ trait AuthUsersRepositories
 
     public function profileRepositories()
     {
-        return $this->response()->ok(new ProfileResource(Profile::whereusers_id(Auth::guard('user')->user()->id)->first()), 'Successfully Data Profiles');
+        if ($data = Profile::whereusers_id(Auth::guard('user')->user()->id)->first()) {
+            $profile = $this->response()->ok(new ProfileResource($data), 'Successfuly Data');
+        } else {
+            $profile = $this->response()->error('Profile Belum ada');
+        }
+        return $profile;
     }
 
     public function ProfileUpdateOrCreateRepositories($data)
