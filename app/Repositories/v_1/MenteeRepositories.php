@@ -9,12 +9,24 @@ use App\Models\MessageRoom;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\MessageRoomMentee;
+use App\Models\User as Mentor;
 
 trait MenteeRepositories
 {
     public function response()
     {
         return new Controller;
+    }
+
+    public function listMentorRepositories($request)
+    {
+        return Mentor::where('role_id', '=', 7)
+            ->when($request->username, function ($query) use ($request) {
+                return $query->where('username', 'like', "%{$request->username}%");
+            })
+            ->with('profile')
+            ->orderByDesc('id')
+            ->paginate($this->response()->pagination($request));
     }
 
     public function chatRoomRepositories($idRoom, $request)
