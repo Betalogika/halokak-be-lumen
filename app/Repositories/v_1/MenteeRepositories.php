@@ -42,12 +42,12 @@ trait MenteeRepositories
 
     public function chatRoomRepositories($idRoom, $request)
     {
-        $data = MessageRoom::wherecode($idRoom)
-            ->when($request->message, function ($query) use ($request) {
-                return $query->where('message', 'like', "%{$request->message}%");
-            })
-            ->orderByDesc('_id')
-            ->paginate($this->response()->pagination($request));
+        $data = MessageRoom::where([
+            ['mentee.id', '=', Auth::guard('user')->user()->id],
+            ['code', $idRoom]
+        ])->when($request->message, function ($query) use ($request) {
+            return $query->where('message', 'like', "%{$request->message}%");
+        })->orderByDesc('_id')->paginate($this->response()->pagination($request));
 
         return $data;
     }
