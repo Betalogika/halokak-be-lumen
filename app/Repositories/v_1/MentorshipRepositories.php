@@ -18,9 +18,9 @@ trait MentorshipRepositories
 
     public function listRoomRepositories($request)
     {
-        $message = Mentorship::where('mentor.id', '=', Auth::guard('user')->user()->id)->first();
+        $mentor = Mentorship::where('mentor.id', '=', Auth::guard('mentor')->user()->id)->first();
 
-        return MessageRoom::wherecode($message->code)
+        return MessageRoom::wherecode($mentor->code)
             ->when($request->code, function ($query) use ($request) {
                 return $query->where('code', 'like', "%{$request->code}%");
             })->when($request->title, function ($query) use ($request) {
@@ -28,6 +28,26 @@ trait MentorshipRepositories
             })->when($request->desc, function ($query) use ($request) {
                 return $query->where('desc', 'like', "%{$request->desc}%");
             })->orderByDesc('_id')->paginate($this->response()->pagination($request));
+    }
+
+    public function listRoomMessageRepositories($idRoom, $request)
+    {
+        if ($message = Mentorship::where([
+            ['mentor.id', '=', Auth::guard('mentor')->user()->id],
+            ['code', $idRoom]
+        ])->first()) {
+            $result = $this->response()->error('code room tidak ditemukan');
+        } else {
+            $result = MessageRoom::wherecode($message->code)
+                ->when($request->code, function ($query) use ($request) {
+                    return $query->where('code', 'like', "%{$request->code}%");
+                })->orderByDesc('_id')
+                ->paginate($this->response()->pagination($request));
+
+            return $result;
+        }
+
+        return $result;
     }
 
 
