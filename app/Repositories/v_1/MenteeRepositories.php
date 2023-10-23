@@ -42,14 +42,19 @@ trait MenteeRepositories
 
     public function chatRoomRepositories($idRoom, $request)
     {
-        $data = MessageRoom::where([
+        if (Mentorship::where([
             ['mentee.id', '=', Auth::guard('user')->user()->id],
             ['code', $idRoom]
-        ])->when($request->message, function ($query) use ($request) {
-            return $query->where('message', 'like', "%{$request->message}%");
-        })->orderByDesc('_id')->paginate($this->response()->pagination($request));
+        ])->first()) {
+            $data = MessageRoom::where('code', $idRoom)
+                ->when($request->message, function ($query) use ($request) {
+                    return $query->where('message', 'like', "%{$request->message}%");
+                })->orderByDesc('_id')->paginate($this->response()->pagination($request));
 
-        return $data;
+            return $data;
+        } else {
+            return $this->response()->error('code room salah dan ada tidak bisa melihat percakapan room user lain');
+        }
     }
 
     public function sendChatMentorRepositories($request)

@@ -16,23 +16,9 @@ trait MentorshipRepositories
         return new Controller;
     }
 
-    public function listRoomRepositories($request)
-    {
-        $mentor = Mentorship::where('mentor.id', '=', Auth::guard('mentor')->user()->id)->first();
-
-        return MessageRoom::wherecode($mentor->code)
-            ->when($request->code, function ($query) use ($request) {
-                return $query->where('code', 'like', "%{$request->code}%");
-            })->when($request->title, function ($query) use ($request) {
-                return $query->where('title', 'like', "%{$request->title}%");
-            })->when($request->desc, function ($query) use ($request) {
-                return $query->where('desc', 'like', "%{$request->desc}%");
-            })->orderByDesc('_id')->paginate($this->response()->pagination($request));
-    }
-
     public function listRoomMessageRepositories($idRoom, $request)
     {
-        if ($message = Mentorship::where([
+        if (!$message = Mentorship::where([
             ['mentor.id', '=', Auth::guard('mentor')->user()->id],
             ['code', $idRoom]
         ])->first()) {
@@ -56,13 +42,20 @@ trait MentorshipRepositories
         DB::beginTransaction();
         try {
             $submitMessage = $request->only('code', 'mentor', 'message');
-            if (!Mentorship::wherecode($request->code)->first()) return $this->response()->error('code room tidak di temukan');
-            $submitMessage['mentor'] = array(
-                'id' => Auth::guard('mentor')->user()->id,
-                'nama' => Auth::guard('mentor')->user()->username,
-            );
-            MessageRoom::create($submitMessage);
-            DB::commit();
+            if (Mentorship::where([
+                ['mentor.id', '=', Auth::guard('mentor')->user()->id],
+                ['code', $submitMessage['code']]
+            ])->first()) {
+                if (!Mentorship::wherecode($request->code)->first()) return $this->response()->error('code room tidak di temukan');
+                $submitMessage['mentor'] = array(
+                    'id' => Auth::guard('mentor')->user()->id,
+                    'nama' => Auth::guard('mentor')->user()->username,
+                );
+                MessageRoom::create($submitMessage);
+                DB::commit();
+            } else {
+                return $this->response()->error('code room tidak ditemukan');
+            }
             return $this->response()->ok($submitMessage, 'berhasil kirim message');
         } catch (\Exception $error) {
             DB::rollBack();
