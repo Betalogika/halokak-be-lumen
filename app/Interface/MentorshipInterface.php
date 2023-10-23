@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 interface MentorshipInterface
 {
-    public function room(Request $request);
-    public function createRoom(Request $request);
+    public function roomMentor(Request $request);
+    public function listRoomMessage($idRoomm, Request $request);
     public function sendMessageRoom(Request $request);
 }

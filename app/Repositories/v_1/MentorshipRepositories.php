@@ -3,13 +3,10 @@
 namespace App\Repositories\v_1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\RoomResource;
 use App\Models\Mentorship;
 use App\Models\MessageRoom;
-use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 trait MentorshipRepositories
 {
@@ -18,83 +15,62 @@ trait MentorshipRepositories
         return new Controller;
     }
 
-    private static function codeRoom()
+    public function roomMentorRepositories($request)
     {
-        $xCode = Str::random(3);
-        $yCode = Str::random(4);
-        $zCode = Str::random(3);
-        $codeRoom = "{$xCode}-{$yCode}-{$zCode}";
-        return $codeRoom;
-    }
-
-    public function RoomRepositories($request)
-    {
-        $data = Mentorship::where('mentor_user_id.id', Auth::guard('mentor')->user()->id)
+        return Mentorship::where('mentor.id', '=', Auth::guard('mentor')->user()->id)
             ->when($request->code, function ($query) use ($request) {
                 return $query->where('code', 'like', "%{$request->code}%");
             })->when($request->title, function ($query) use ($request) {
                 return $query->where('title', 'like', "%{$request->title}%");
             })->when($request->desc, function ($query) use ($request) {
                 return $query->where('desc', 'like', "%{$request->desc}%");
+            })->when($request->status, function ($query) use ($request) {
+                return $query->where('status', 'like', "%{$request->status}%");
             })
             ->orderByDesc('_id')
             ->paginate($this->response()->pagination($request));
-        return $data;
     }
 
-    public function chatRoomRepositories($idRoom, $request)
+    public function listRoomMessageRepositories($idRoom, $request)
     {
-        $data = MessageRoom::wherecode($idRoom)
-            ->when($request->message, function ($query) use ($request) {
-                return $query->where('message', 'like', "%{$request->message}%");
-            })
-            ->orderByDesc('_id')
-            ->paginate($this->response()->pagination($request));
+        if (!$message = Mentorship::where([
+            ['mentor.id', '=', Auth::guard('mentor')->user()->id],
+            ['code', $idRoom]
+        ])->first()) {
+            $result = $this->response()->error('code room tidak ditemukan');
+        } else {
+            $result = MessageRoom::wherecode($message->code)
+                ->when($request->code, function ($query) use ($request) {
+                    return $query->where('code', 'like', "%{$request->code}%");
+                })->orderByDesc('_id')
+                ->paginate($this->response()->pagination($request));
 
-        return $data;
-    }
-
-    public function createRoomRepostiories($request)
-    {
-        DB::beginTransaction();
-        try {
-            $submitRoom = $request->only('title', 'code', 'desc', 'mentor', 'status');
-            $submitRoom['code'] = $this->codeRoom();
-            if (!$profile = Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first()) {
-                return $this->response()->error('profile belum ada');
-            } else {
-                $submitRoom['mentor'] = array(
-                    'id' => Auth::guard('mentor')->user()->id,
-                    'nama' => $profile->nama_lengkap,
-                    'photo' => $profile->photo,
-                );
-            }
-            Mentorship::create($submitRoom);
-            DB::commit();
-            return $this->response()->ok($submitRoom, 'Successfully Create Room');
-        } catch (\Exception $error) {
-            DB::rollBack();
-            return $this->response()->error($error);
+            return $result;
         }
+
+        return $result;
     }
+
 
     public function sendMessageRoomRepostiories($request)
     {
         DB::beginTransaction();
         try {
-            $submitMessage = $request->only('code', 'mentor_user_id', 'message');
-            if (!Mentorship::wherecode($request->code)->first()) return $this->response()->error('code room tidak di temukan');
-            if (!$profile = Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first()) {
-                return $this->response()->error('profile belum ada');
-            } else {
+            $submitMessage = $request->only('code', 'mentor', 'message');
+            if (Mentorship::where([
+                ['mentor.id', '=', Auth::guard('mentor')->user()->id],
+                ['code', $submitMessage['code']]
+            ])->first()) {
+                if (!Mentorship::wherecode($request->code)->first()) return $this->response()->error('code room tidak di temukan');
                 $submitMessage['mentor'] = array(
                     'id' => Auth::guard('mentor')->user()->id,
-                    'nama' => $profile->nama_lengkap,
-                    'photo' => $profile->photo,
+                    'nama' => Auth::guard('mentor')->user()->username,
                 );
+                MessageRoom::create($submitMessage);
+                DB::commit();
+            } else {
+                return $this->response()->error('code room tidak ditemukan');
             }
-            MessageRoom::create($submitMessage);
-            DB::commit();
             return $this->response()->ok($submitMessage, 'berhasil kirim message');
         } catch (\Exception $error) {
             DB::rollBack();
