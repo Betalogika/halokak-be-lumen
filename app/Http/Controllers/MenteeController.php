@@ -12,6 +12,11 @@ class MenteeController extends Controller implements MenteeInterface
 {
     use MenteeRepositories;
 
+    public function listRoom(Request $request)
+    {
+        return $this->listRoomRepositories($request);
+    }
+
     public function listMentor(Request $request)
     {
         return $this->listMentorRepositories($request);

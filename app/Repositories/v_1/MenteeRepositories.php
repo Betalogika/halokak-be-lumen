@@ -28,6 +28,21 @@ trait MenteeRepositories
         return $codeRoom;
     }
 
+    public function listRoomRepositories($request)
+    {
+        return Mentorship::where('mentee.id', '=', Auth::guard('user')->user()->id)
+            ->when($request->code, function ($query) use ($request) {
+                return $query->where('code', 'like', "%{$request->code}%");
+            })->when($request->title, function ($query) use ($request) {
+                return $query->where('title', 'like', "%{$request->title}%");
+            })->when($request->desc, function ($query) use ($request) {
+                return $query->where('desc', 'like', "%{$request->desc}%");
+            })->when($request->status, function ($query) use ($request) {
+                return $query->where('status', 'like', "%{$request->status}%");
+            })
+            ->orderByDesc('_id')
+            ->paginate($this->response()->pagination($request));
+    }
 
     public function listMentorRepositories($request)
     {
