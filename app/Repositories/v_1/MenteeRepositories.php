@@ -53,7 +53,7 @@ trait MenteeRepositories
 
             return $data;
         } else {
-            return $this->response()->error('code room salah dan ada tidak bisa melihat percakapan room user lain');
+            return $this->response()->error('code room salah dan anda tidak bisa melihat percakapan room user lain');
         }
     }
 
