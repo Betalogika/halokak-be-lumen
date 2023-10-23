@@ -5,7 +5,6 @@ namespace App\Repositories\v_1;
 use App\Http\Controllers\Controller;
 use App\Models\Mentorship;
 use App\Models\MessageRoom;
-use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -14,6 +13,22 @@ trait MentorshipRepositories
     public function response()
     {
         return new Controller;
+    }
+
+    public function roomMentorRepositories($request)
+    {
+        return Mentorship::where('mentor.id', '=', Auth::guard('mentor')->user()->id)
+            ->when($request->code, function ($query) use ($request) {
+                return $query->where('code', 'like', "%{$request->code}%");
+            })->when($request->title, function ($query) use ($request) {
+                return $query->where('title', 'like', "%{$request->title}%");
+            })->when($request->desc, function ($query) use ($request) {
+                return $query->where('desc', 'like', "%{$request->desc}%");
+            })->when($request->status, function ($query) use ($request) {
+                return $query->where('status', 'like', "%{$request->status}%");
+            })
+            ->orderByDesc('_id')
+            ->paginate($this->response()->pagination($request));
     }
 
     public function listRoomMessageRepositories($idRoom, $request)

@@ -12,6 +12,11 @@ class MentorshipControllers extends Controller implements MentorshipInterface
 {
     use MentorshipRepositories;
 
+    public function roomMentor(Request $request)
+    {
+        return $this->roomMentorRepositories($request);
+    }
+
     public function listRoomMessage($idRoom, Request $request)
     {
         return $this->listRoomMessageRepositories($idRoom, $request);
