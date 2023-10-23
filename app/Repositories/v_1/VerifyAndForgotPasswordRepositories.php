@@ -35,7 +35,7 @@ trait VerifyAndForgotPasswordRepositories
             );
             $result = $this->response()->ok($user);
         } catch (\Exception $error) {
-            $result = $this->response()->error('token salah', 500, $error);
+            $result = $this->response()->error('token salah atau token sudah kadaluarsa');
         }
         return $result;
     }
@@ -48,7 +48,7 @@ trait VerifyAndForgotPasswordRepositories
             ModelVerify::wheretoken($tokenURL)->delete();  //after success verify and then delete token verify
             $result = $this->response()->ok(User::whereId($token->users_id)->first(), 'Akun Anda Sudah Aktif silahkan lakukan login');
         } catch (\Exception $error) {
-            $result = $this->response()->error('token salah', 500, $error);
+            $result = $this->response()->error('token salah atau token sudah kadaluarsa');
         }
         return $result;
     }
@@ -76,7 +76,7 @@ trait VerifyAndForgotPasswordRepositories
             forgotPasswords::wheretoken($tokenURL)->delete(); //after delete after success
             return $this->response()->ok($user, 'password berhasil di reset');
         } catch (\Exception $error) {
-            return $this->response()->error('token salah', 500, $error);
+            return $this->response()->error('token salah atau token sudah kadaluarsa');
         }
     }
 }
