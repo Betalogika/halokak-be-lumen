@@ -1,916 +1,741 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+    xmlns:o="urn:schemas-microsoft-com:office:office">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style type="text/css" rel="stylesheet" media="all">
-        *:not(br):not(tr):not(html) {
-            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    <!--[if gte mso 9
+      ]><xml>
+        <o:OfficeDocumentSettings>
+          <o:AllowPNG />
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+      </xml><!
+    [endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--<![endif]-->
+    <title></title>
+    <!--[if !mso]><!-- -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
+    <!--<![endif]-->
+
+    <style type="text/css" id="media-query">
+        .box {
+            background: rgba(253, 0, 46, 0.12);
+            border-radius: 6px;
         }
 
-        html,
-        body,
-        div,
-        span,
-        applet,
-        object,
-        iframe,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        p,
-        blockquote,
-        pre,
-        a,
-        abbr,
-        acronym,
-        address,
-        big,
-        cite,
-        code,
-        del,
-        dfn,
-        em,
-        img,
-        ins,
-        kbd,
-        q,
-        s,
-        samp,
-        small,
-        strike,
-        strong,
-        sub,
-        sup,
-        tt,
-        var,
-        b,
-        u,
-        i,
-        center,
-        dl,
-        dt,
-        dd,
-        ol,
-        ul,
-        li,
-        fieldset,
-        form,
-        label,
-        legend,
-        table,
-        caption,
-        tbody,
-        tfoot,
-        thead,
-        tr,
-        th,
-        td,
-        article,
-        aside,
-        canvas,
-        details,
-        embed,
-        figure,
-        figcaption,
-        footer,
-        header,
-        hgroup,
-        menu,
-        nav,
-        output,
-        ruby,
-        section,
-        summary,
-        time,
-        mark,
-        audio,
-        video {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            font-size: 100%;
-            font: inherit;
-            vertical-align: baseline;
+        .message {
+            color: #b31412;
         }
 
-        article,
-        aside,
-        details,
-        figcaption,
-        figure,
-        footer,
-        header,
-        hgroup,
-        menu,
-        nav,
-        section {
-            display: block;
+        .box-success {
+            background: rgba(74, 201, 155, 0.12);
+            border-radius: 6px;
+        }
+
+        .message-success {
+            color: #19ac77;
+        }
+
+        .gradient-uic {
+            background: #6ac8d2;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 80px;
+            width: 101px;
+            height: 30px;
+            border-style: none;
+            padding: 5px;
+        }
+
+        .button-color {
+            color: white;
+        }
+
+        .box-black {
+            background: rgba(240, 240, 240, 0.85);
+            border-radius: 6px;
+        }
+
+        .message-black {
+            color: #000000;
+        }
+
+        a.button-color .gradient-uic:before {
+            background-color: unset !important;
         }
 
         body {
-            line-height: 1;
+            margin: 0;
+            padding: 0;
         }
 
-        ol,
-        ul {
-            list-style: none;
-        }
-
-        blockquote,
-        q {
-            quotes: none;
-        }
-
-        blockquote:before,
-        blockquote:after,
-        q:before,
-        q:after {
-            content: "";
-            content: none;
-        }
-
-        table {
+        table,
+        tr,
+        td {
+            vertical-align: top;
             border-collapse: collapse;
-            border-spacing: 0;
+        }
+
+        .ie-browser table,
+        .mso-container table {
+            table-layout: fixed;
         }
 
         * {
-            -webkit-font-smoothing: antialiased;
-            box-sizing: border-box;
+            line-height: inherit;
         }
 
-        html,
-        body {
-            margin: 0px;
-            height: 100%;
+        a[x-apple-data-detectors="true"] {
+            color: inherit !important;
+            text-decoration: none !important;
         }
 
-        /* a blue color as a generic focus style */
-        button:focus-visible {
-            outline: 2px solid #4a90e2 !important;
-            outline: -webkit-focus-ring-color auto 5px !important;
+        [owa] .img-container div,
+        [owa] .img-container button {
+            display: block !important;
         }
 
-        a {
-            text-decoration: none;
+        [owa] .fullwidth button {
+            width: 100% !important;
         }
 
-        @import url("https://fonts.googleapis.com/css?family=Poppins:400");
-
-        .notif-email {
-            background-color: #ffffff;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            width: 100%;
+        [owa] .block-grid .col {
+            display: table-cell;
+            float: none !important;
+            vertical-align: top;
         }
 
-        .notif-email .overlap-wrapper {
-            background-color: #ffffff;
-            width: 762px;
-            height: 559px;
+        .ie-browser .num12,
+        .ie-browser .block-grid,
+        [owa] .num12,
+        [owa] .block-grid {
+            width: 720px !important;
         }
 
-        .email-wrapper {
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f7f9;
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+            line-height: 100%;
         }
 
-        .email-content {
-            width: 100%;
-            margin: 0;
-            padding: 0;
+        .ie-browser .mixed-two-up .num4,
+        [owa] .mixed-two-up .num4 {
+            width: 240px !important;
         }
 
-        p.center {
-            text-align: center;
+        .ie-browser .mixed-two-up .num8,
+        [owa] .mixed-two-up .num8 {
+            width: 480px !important;
         }
 
-        p,
-        br.sub {
-            font-size: 12px;
+        .ie-browser .block-grid.two-up .col,
+        [owa] .block-grid.two-up .col {
+            width: 360px !important;
         }
 
-        .notif-email .overlap {
-            position: relative;
-            width: 694px;
-            height: 502px;
-            top: 30px;
-            left: 28px;
+        .ie-browser .block-grid.three-up .col,
+        [owa] .block-grid.three-up .col {
+            width: 240px !important;
         }
 
-        .notif-email .overlap-group {
-            position: absolute;
-            width: 694px;
-            height: 459px;
-            top: 43px;
-            left: 0;
+        .ie-browser .block-grid.four-up .col,
+        [owa] .block-grid.four-up .col {
+            width: 180px !important;
         }
 
-        .notif-email .vector {
-            position: absolute;
-            width: 66px;
-            height: 75px;
-            top: 0;
-            left: 0;
+        .ie-browser .block-grid.five-up .col,
+        [owa] .block-grid.five-up .col {
+            width: 144px !important;
         }
 
-        .notif-email .img {
-            position: absolute;
-            width: 66px;
-            height: 75px;
-            top: 378px;
-            left: 0;
+        .ie-browser .block-grid.six-up .col,
+        [owa] .block-grid.six-up .col {
+            width: 120px !important;
         }
 
-        .notif-email .rectangle {
-            position: absolute;
-            width: 681px;
-            height: 388px;
-            top: 43px;
-            left: 13px;
-            background-color: #f8f7f3;
-            border-radius: 30px;
+        .ie-browser .block-grid.seven-up .col,
+        [owa] .block-grid.seven-up .col {
+            width: 102px !important;
         }
 
-        .notif-email .group {
-            position: absolute;
-            width: 56px;
-            height: 56px;
-            top: 403px;
-            left: 545px;
+        .ie-browser .block-grid.eight-up .col,
+        [owa] .block-grid.eight-up .col {
+            width: 90px !important;
         }
 
-        .notif-email .group-2 {
-            position: absolute;
-            width: 56px;
-            height: 6px;
-            top: 0;
-            left: 0;
+        .ie-browser .block-grid.nine-up .col,
+        [owa] .block-grid.nine-up .col {
+            width: 80px !important;
         }
 
-        .notif-email .div {
-            position: absolute;
-            width: 56px;
-            height: 6px;
-            top: 50px;
-            left: 0;
+        .ie-browser .block-grid.ten-up .col,
+        [owa] .block-grid.ten-up .col {
+            width: 72px !important;
         }
 
-        .notif-email .ellipse {
-            width: 6px;
-            height: 6px;
-            left: 0;
-            background-color: #6ac8d280;
-            border-radius: 3px;
-            position: absolute;
-            top: 0;
+        .ie-browser .block-grid.eleven-up .col,
+        [owa] .block-grid.eleven-up .col {
+            width: 65px !important;
         }
 
-        .notif-email .ellipse-2 {
-            left: 10px;
-            background-color: #6ac8d280;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: 0;
-            border-radius: 3px;
+        .ie-browser .block-grid.twelve-up .col,
+        [owa] .block-grid.twelve-up .col {
+            width: 60px !important;
         }
 
-        .notif-email .ellipse-3 {
-            left: 20px;
-            background-color: #6ac8d280;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: 0;
-            border-radius: 3px;
-        }
-
-        .notif-email .ellipse-4 {
-            left: 30px;
-            background-color: #6ac8d280;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: 0;
-            border-radius: 3px;
-        }
-
-        .notif-email .ellipse-5 {
-            left: 40px;
-            background-color: #6ac8d280;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: 0;
-            border-radius: 3px;
-        }
-
-        .notif-email .ellipse-6 {
-            left: 50px;
-            background-color: #6ac8d280;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: 0;
-            border-radius: 3px;
-        }
-
-        .notif-email .group-3 {
-            position: absolute;
-            width: 56px;
-            height: 6px;
-            top: 40px;
-            left: 0;
-        }
-
-        .notif-email .group-4 {
-            position: absolute;
-            width: 56px;
-            height: 6px;
-            top: 30px;
-            left: 0;
-        }
-
-        .notif-email .group-5 {
-            position: absolute;
-            width: 56px;
-            height: 6px;
-            top: 20px;
-            left: 0;
-        }
-
-        .notif-email .group-6 {
-            position: absolute;
-            width: 56px;
-            height: 6px;
-            top: 10px;
-            left: 0;
-        }
-
-        .notif-email .hai-ahmad-selamat {
-            position: absolute;
-            width: 667px;
-            height: 399px;
-            top: 31px;
-            left: 20px;
-            font-family: "Poppins", Helvetica;
-            font-weight: 400;
-            color: transparent;
-            font-size: 15px;
-            letter-spacing: 0.15px;
-            line-height: 24px;
-        }
-
-        .notif-email .text-wrapper {
-            color: #53565a;
-        }
-
-        .notif-email .span {
-            color: #1f78ee;
-        }
-
-        .notif-email .text-wrapper-2 {
-            color: #1f78ef;
-        }
-
-        .notif-email .group-7 {
-            position: absolute;
-            width: 56px;
-            height: 56px;
-            top: 15px;
-            left: 631px;
-        }
-
-        .notif-email .ellipse-7 {
-            left: 0;
-            background-color: #d00a0a80;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: 0;
-            border-radius: 3px;
-        }
-
-        .notif-email .ellipse-8 {
-            left: 10px;
-            background-color: #d00a0a80;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: 0;
-            border-radius: 3px;
-        }
-
-        .notif-email .ellipse-9 {
-            left: 20px;
-            background-color: #d00a0a80;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: 0;
-            border-radius: 3px;
-        }
-
-        .notif-email .ellipse-10 {
-            left: 30px;
-            background-color: #d00a0a80;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: 0;
-            border-radius: 3px;
-        }
-
-        .notif-email .ellipse-11 {
-            left: 40px;
-            background-color: #d00a0a80;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: 0;
-            border-radius: 3px;
-        }
-
-        .notif-email .ellipse-12 {
-            left: 50px;
-            background-color: #d00a0a80;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: 0;
-            border-radius: 3px;
-        }
-
-        .notif-email .group-8 {
-            position: absolute;
-            width: 227px;
-            height: 49px;
-            top: 0;
-            left: 240px;
-        }
-
-        .notif-email .group-9 {
-            position: absolute;
-            width: 56px;
-            height: 49px;
-            top: 0;
-            left: 0;
-        }
-
-        .notif-email .overlap-group-2 {
-            position: absolute;
-            width: 45px;
-            height: 49px;
-            top: 0;
-            left: 11px;
-        }
-
-        .notif-email .rectangle-2 {
-            position: absolute;
-            width: 11px;
-            height: 49px;
-            top: 0;
-            left: 20px;
-            background-color: #fec395;
-            border-radius: 100px;
-        }
-
-        .notif-email .rectangle-3 {
-            position: absolute;
-            width: 11px;
-            height: 45px;
-            top: 2px;
-            left: 17px;
-            border-radius: 0px 100px 0px 0px;
-            transform: rotate(90deg);
-            background: linear-gradient(180deg,
-                    rgb(208.25, 10.41, 10.41) 0.34%,
-                    rgba(208.25, 10.41, 10.41, 0.93) 56.03%,
-                    rgba(208.25, 10.41, 10.41, 0.5) 100%);
-        }
-
-        .notif-email .rectangle-4 {
-            position: absolute;
-            width: 11px;
-            height: 49px;
-            top: 0;
-            left: 0;
-            background-color: #6ac8d2;
-            border-radius: 100px;
-        }
-
-        .notif-email .group-10 {
-            position: absolute;
-            width: 156px;
-            height: 27px;
-            top: 11px;
-            left: 71px;
-        }
-
-        .notif-email .group-11 {
-            position: absolute;
-            width: 15px;
-            height: 23px;
-            top: 2px;
-            left: 46px;
-        }
-
-        .notif-email .group-12 {
-            position: absolute;
-            width: 19px;
-            height: 27px;
-            top: 0;
-            left: 90px;
-        }
-
-        .notif-email .group-13 {
-            position: absolute;
-            width: 19px;
-            height: 27px;
-            top: 0;
-            left: 137px;
-        }
+        @media only screen and (min-width: 740px) {
+            .block-grid {
+                width: 720px !important;
+            }
 
-        .notif-email .group-14 {
-            position: absolute;
-            width: 21px;
-            height: 25px;
-            top: 1px;
-            left: 21px;
-        }
-
-        .notif-email .group-15 {
-            position: absolute;
-            width: 21px;
-            height: 25px;
-            top: 1px;
-            left: 113px;
-        }
-
-        .notif-email .group-16 {
-            position: absolute;
-            width: 18px;
-            height: 23px;
-            top: 2px;
-            left: 0;
-        }
-
-        .notif-email .rectangle-5 {
-            position: absolute;
-            width: 3px;
-            height: 23px;
-            top: 0;
-            left: 0;
-            background-color: #6ac8d2;
-        }
+            .block-grid .col {
+                vertical-align: top;
+            }
 
-        .notif-email .overlap-group-3 {
-            position: absolute;
-            width: 12px;
-            height: 23px;
-            top: 0;
-            left: 6px;
-        }
+            .block-grid .col.num12 {
+                width: 720px !important;
+            }
 
-        .notif-email .rectangle-6 {
-            position: absolute;
-            width: 3px;
-            height: 23px;
-            top: 0;
-            left: 10px;
-        }
+            .block-grid.mixed-two-up .col.num4 {
+                width: 240px !important;
+            }
 
-        .notif-email .rectangle-7 {
-            position: absolute;
-            width: 10px;
-            height: 3px;
-            top: 10px;
-            left: 0;
-        }
+            .block-grid.mixed-two-up .col.num8 {
+                width: 480px !important;
+            }
 
-        .notif-email .group-wrapper {
-            position: absolute;
-            width: 23px;
-            height: 23px;
-            top: 2px;
-            left: 64px;
-        }
+            .block-grid.two-up .col {
+                width: 360px !important;
+            }
 
-        .notif-email .overlap-group-wrapper {
-            height: 23px;
-            background-color: #c7c5ac;
-            border-radius: 11.33px;
-        }
+            .block-grid.three-up .col {
+                width: 240px !important;
+            }
 
-        .notif-email .overlap-group-4 {
-            position: relative;
-            width: 23px;
-            height: 18px;
-            top: 2px;
-        }
+            .block-grid.four-up .col {
+                width: 180px !important;
+            }
 
-        .notif-email .ellipse-13 {
-            width: 18px;
-            height: 18px;
-            left: 2px;
-            background-color: #ffffff;
-            border-radius: 8.96px;
-            position: absolute;
-            top: 0;
-        }
+            .block-grid.five-up .col {
+                width: 144px !important;
+            }
 
-        .body-action {
-            width: 100%;
-            margin: 30px auto;
-            padding: 0;
-            text-align: center;
-        }
+            .block-grid.six-up .col {
+                width: 120px !important;
+            }
 
-        .notif-email .rectangle-8 {
-            position: absolute;
-            width: 23px;
-            height: 3px;
-            top: 7px;
-            left: 0;
-            background-color: #ffffff;
-        }
+            .block-grid.seven-up .col {
+                width: 102px !important;
+            }
 
-        .email-body {
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            border-top: 1px solid #e7eaec;
-            border-bottom: 1px solid #e7eaec;
-            background-color: #ffffff;
-        }
+            .block-grid.eight-up .col {
+                width: 90px !important;
+            }
 
-        .email-body_inner {
-            width: 570px;
-            margin: 0 auto;
-            padding: 0;
-        }
+            .block-grid.nine-up .col {
+                width: 80px !important;
+            }
 
-        .content-cell {
-            padding: 35px;
-        }
+            .block-grid.ten-up .col {
+                width: 72px !important;
+            }
 
-        /*Media Queries ------------------------------ */
-        @media only screen and (max-width: 600px) {
+            .block-grid.eleven-up .col {
+                width: 65px !important;
+            }
 
-            .email-body_inner,
-            .email-footer {
-                width: 100% !important;
+            .block-grid.twelve-up .col {
+                width: 60px !important;
             }
         }
 
-        @media only screen and (max-width: 500px) {
-            .button {
+        @media (max-width: 740px) {
+
+            .block-grid,
+            .col {
+                min-width: 320px !important;
+                max-width: 100% !important;
+                display: block !important;
+            }
+
+            .block-grid {
+                width: calc(100% - 40px) !important;
+            }
+
+            .col {
                 width: 100% !important;
+            }
+
+            .col>div {
+                margin: 0 auto;
+            }
+
+            img.fullwidth,
+            img.fullwidthOnMobile {
+                max-width: 100% !important;
+            }
+
+            .no-stack .col {
+                min-width: 0 !important;
+                display: table-cell !important;
+            }
+
+            .no-stack.two-up .col {
+                width: 50% !important;
+            }
+
+            .no-stack.mixed-two-up .col.num4 {
+                width: 33% !important;
+            }
+
+            .no-stack.mixed-two-up .col.num8 {
+                width: 66% !important;
+            }
+
+            .no-stack.three-up .col.num4 {
+                width: 33% !important;
+            }
+
+            .no-stack.four-up .col.num3 {
+                width: 25% !important;
+            }
+
+            .mobile_hide {
+                min-height: 0px;
+                max-height: 0px;
+                max-width: 0px;
+                display: none;
+                overflow: hidden;
+                font-size: 0px;
             }
         }
     </style>
 </head>
 
-<body>
-    <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0">
-        <tr>
-            <td align="center">
-                <table class="email-content" width="100%" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td class="email-body" width="100%">
-                            <table class="email-body_inner" align="center" width="570" cellpadding="0"
-                                cellspacing="0">
-                                <tr>
-                                    <td class="content-cell">
-                                        <table class="body-action" align="center" width="100%" cellpadding="0"
-                                            cellspacing="0">
-                                            <tr>
-                                                <td align="center">
-                                                    <div>
-                                                        <div class="notif-email">
-                                                            <div class="overlap-wrapper">
-                                                                <div class="overlap">
-                                                                    <div class="overlap-group">
-                                                                        <!-- svg 1-->
-                                                                        <svg width="66" height="75"
-                                                                            viewBox="0 0 66 75" fill="none"
-                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                            <path fill-rule="evenodd"
-                                                                                clip-rule="evenodd"
-                                                                                d="M32.3208 0.00187086C46.1385 -0.132991 60.6254 7.01569 64.8818 23.9424C69.1278 40.8277 60.704 57.6784 49.3594 67.7601C38.9338 77.025 25.3787 77.6111 14.9875 68.2821C3.9144 58.3409 -2.94957 41.0845 1.24435 24.5635C5.41924 8.11745 18.8832 0.133022 32.3208 0.00187086Z"
-                                                                                fill="#FEC395" fill-opacity="0.5" />
-                                                                        </svg>
-                                                                        <!-- svg 2-->
-                                                                        <div class="img">
-                                                                            <svg width="66" height="75"
-                                                                                viewBox="0 0 66 75" fill="none"
-                                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                                <path opacity="0.5" fill-rule="evenodd"
-                                                                                    clip-rule="evenodd"
-                                                                                    d="M32.3208 0.00187086C46.1385 -0.132991 60.6254 7.01569 64.8818 23.9424C69.1278 40.8277 60.704 57.6784 49.3594 67.7601C38.9338 77.025 25.3787 77.6111 14.9875 68.2821C3.9144 58.3409 -2.94957 41.0845 1.24435 24.5635C5.41924 8.11745 18.8832 0.133022 32.3208 0.00187086Z"
-                                                                                    fill="#6AC8D2"
-                                                                                    fill-opacity="0.61" />
-                                                                            </svg>
-                                                                        </div>
-                                                                        <div class="rectangle"></div>
-                                                                        <div class="group">
-                                                                            <img class="group-2"
-                                                                                src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/group-35114.png" />
-                                                                            <div class="div">
-                                                                                <div class="ellipse"></div>
-                                                                                <div class="ellipse-2"></div>
-                                                                                <div class="ellipse-3"></div>
-                                                                                <div class="ellipse-4"></div>
-                                                                                <div class="ellipse-5"></div>
-                                                                                <div class="ellipse-6"></div>
-                                                                            </div>
-                                                                            <div class="group-3">
-                                                                                <div class="ellipse"></div>
-                                                                                <div class="ellipse-2"></div>
-                                                                                <div class="ellipse-3"></div>
-                                                                                <div class="ellipse-4"></div>
-                                                                                <div class="ellipse-5"></div>
-                                                                                <div class="ellipse-6"></div>
-                                                                            </div>
-                                                                            <div class="group-4">
-                                                                                <div class="ellipse"></div>
-                                                                                <div class="ellipse-2"></div>
-                                                                                <div class="ellipse-3"></div>
-                                                                                <div class="ellipse-4"></div>
-                                                                                <div class="ellipse-5"></div>
-                                                                                <div class="ellipse-6"></div>
-                                                                            </div>
-                                                                            <div class="group-5">
-                                                                                <div class="ellipse"></div>
-                                                                                <div class="ellipse-2"></div>
-                                                                                <div class="ellipse-3"></div>
-                                                                                <div class="ellipse-4"></div>
-                                                                                <div class="ellipse-5"></div>
-                                                                                <div class="ellipse-6"></div>
-                                                                            </div>
-                                                                            <div class="group-6">
-                                                                                <div class="ellipse"></div>
-                                                                                <div class="ellipse-2"></div>
-                                                                                <div class="ellipse-3"></div>
-                                                                                <div class="ellipse-4"></div>
-                                                                                <div class="ellipse-5"></div>
-                                                                                <div class="ellipse-6"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!-- email body -->
-                                                                        <p class="hai-ahmad-selamat">
-                                                                            <br />
-                                                                            <br />
-                                                                            <span class="text-wrapper">Hai
-                                                                                {{ $username }}!<br />
-                                                                                <br />Selamat datang di HaloKak!
-                                                                                <br />Untuk melanjutkan pendaftaran
-                                                                                silahkan verifikasi bahwa email:
-                                                                                {{ $email }} ini benar anda
-                                                                                <br />dengan
-                                                                                klik link berikut :
-                                                                            </span>
-                                                                            <span class="span"><a
-                                                                                    href="{{ $url }}"
-                                                                                    target="_blank">Verify Account</a>
-                                                                                <br /></span>
-                                                                            <span class="text-wrapper">
-                                                                                <br />Jika Anda memiliki pertanyaan,
-                                                                                <br />jangan ragu untuk menghubungi
-                                                                                layanan pelanggan kami di
-                                                                            </span>
-                                                                            <span class="text-wrapper-2"><a
-                                                                                    href="mailto:halokakteam@gmail.com
-">HalokakTeam</a><br /></span>
-                                                                            <span class="text-wrapper">
-                                                                                <br />Terima kasih! <br />
-                                                                                <br />Tim HaloKak</span>
-                                                                        </p>
-                                                                        <div class="group-7">
-                                                                            <img class="group-2"
-                                                                                src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/group-35114-1.png" />
-                                                                            <div class="div">
-                                                                                <div class="ellipse-7"></div>
-                                                                                <div class="ellipse-8"></div>
-                                                                                <div class="ellipse-9"></div>
-                                                                                <div class="ellipse-10"></div>
-                                                                                <div class="ellipse-11"></div>
-                                                                                <div class="ellipse-12"></div>
-                                                                            </div>
-                                                                            <div class="group-3">
-                                                                                <div class="ellipse-7"></div>
-                                                                                <div class="ellipse-8"></div>
-                                                                                <div class="ellipse-9"></div>
-                                                                                <div class="ellipse-10"></div>
-                                                                                <div class="ellipse-11"></div>
-                                                                                <div class="ellipse-12"></div>
-                                                                            </div>
-                                                                            <div class="group-4">
-                                                                                <div class="ellipse-7"></div>
-                                                                                <div class="ellipse-8"></div>
-                                                                                <div class="ellipse-9"></div>
-                                                                                <div class="ellipse-10"></div>
-                                                                                <div class="ellipse-11"></div>
-                                                                                <div class="ellipse-12"></div>
-                                                                            </div>
-                                                                            <div class="group-5">
-                                                                                <div class="ellipse-7"></div>
-                                                                                <div class="ellipse-8"></div>
-                                                                                <div class="ellipse-9"></div>
-                                                                                <div class="ellipse-10"></div>
-                                                                                <div class="ellipse-11"></div>
-                                                                                <div class="ellipse-12"></div>
-                                                                            </div>
-                                                                            <div class="group-6">
-                                                                                <div class="ellipse-7"></div>
-                                                                                <div class="ellipse-8"></div>
-                                                                                <div class="ellipse-9"></div>
-                                                                                <div class="ellipse-10"></div>
-                                                                                <div class="ellipse-11"></div>
-                                                                                <div class="ellipse-12"></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="group-8">
-                                                                        <div class="group-9">
-                                                                            <div class="overlap-group-2">
-                                                                                <div class="rectangle-2"></div>
-                                                                                <div class="rectangle-3"></div>
-                                                                            </div>
-                                                                            <div class="rectangle-4"></div>
-                                                                        </div>
-                                                                        <div class="group-10">
-                                                                            <img class="group-11"
-                                                                                src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/group-35212.png" />
-                                                                            <img class="group-12"
-                                                                                src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/group-35207.png" />
-                                                                            <img class="group-13"
-                                                                                src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/group-35214.png" />
-                                                                            <img class="group-14"
-                                                                                src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/group-35211.png" />
-                                                                            <img class="group-15"
-                                                                                src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/group-35213.png" />
-                                                                            <div class="group-16">
-                                                                                <div class="rectangle-5"></div>
-                                                                                <div class="overlap-group-3">
-                                                                                    <div class="rectangle-6">
-                                                                                        <svg width="3"
-                                                                                            height="23"
-                                                                                            viewBox="0 0 3 23"
-                                                                                            fill="none"
-                                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                                            <path
-                                                                                                d="M0.214844 0.349617H2.91968V23.0026H0.214844V0.349617Z"
-                                                                                                fill="#6AC8D2" />
-                                                                                        </svg>
-                                                                                    </div>
-                                                                                    <svg width="11" height="3"
-                                                                                        viewBox="0 0 11 3"
-                                                                                        fill="none"
-                                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                                        <path
-                                                                                            d="M10.4604 0.154617L10.4837 2.85935L0.534831 2.94489L0.511575 0.240161L10.4604 0.154617Z"
-                                                                                            fill="#6AC8D2" />
-                                                                                    </svg>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="group-wrapper">
-                                                                                <div class="overlap-group-wrapper">
-                                                                                    <div class="overlap-group-4">
-                                                                                        <div class="ellipse-13"></div>
-                                                                                        <div class="rectangle-8"></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+<body class="clean-body"
+    style="
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: 100%;
+      background-color: #ffffff;
+    ">
+    <style type="text/css" id="media-query-bodytag">
+        @media (max-width: 520px) {
+            .block-grid {
+                min-width: 320px !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                display: block !important;
+            }
+
+            .col {
+                min-width: 320px !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                display: block !important;
+            }
+
+            .col>div {
+                margin: 0 auto;
+            }
+
+            img.fullwidth {
+                max-width: 100% !important;
+            }
+
+            img.fullwidthOnMobile {
+                max-width: 100% !important;
+            }
+
+            .no-stack .col {
+                min-width: 0 !important;
+                display: table-cell !important;
+            }
+
+            .no-stack.two-up .col {
+                width: 50% !important;
+            }
+
+            .no-stack.mixed-two-up .col.num4 {
+                width: 33% !important;
+            }
+
+            .no-stack.mixed-two-up .col.num8 {
+                width: 66% !important;
+            }
+
+            .no-stack.three-up .col.num4 {
+                width: 33% !important;
+            }
+
+            .no-stack.four-up .col.num3 {
+                width: 25% !important;
+            }
+
+            .mobile_hide {
+                min-height: 0px !important;
+                max-height: 0px !important;
+                max-width: 0px !important;
+                display: none !important;
+                overflow: hidden !important;
+                font-size: 0px !important;
+            }
+        }
+    </style>
+    <!--[if IE]><div class="ie-browser"><![endif]-->
+    <!--[if mso]><div class="mso-container"><![endif]-->
+    <table class="nl-container"
+        style="
+        border-collapse: collapse;
+        table-layout: fixed;
+        border-spacing: 0;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+        vertical-align: top;
+        min-width: 320px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        width: 100%;
+      "
+        cellpadding="0" cellspacing="0">
+        <tbody>
+            <tr style="vertical-align: top">
+                <td
+                    style="
+              word-break: break-word;
+              border-collapse: collapse !important;
+              vertical-align: top;
+            ">
+                    <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #FFFFFF;"><![endif]-->
+
+                    <div style="background-color: #ffffff">
+                        <div style="
+                  margin: 0 auto;
+                  min-width: 320px;
+                  max-width: 720px;
+                  overflow-wrap: break-word;
+                  word-wrap: break-word;
+                  word-break: break-word;
+                  background-color: #ffffff;
+                "
+                            class="block-grid no-stack">
+                            <div
+                                style="
+                    border-collapse: collapse;
+                    display: table;
+                    width: 100%;
+                    background-color: #ffffff;
+                  ">
+                                <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background-color:#FFFFFF;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width: 720px;"><tr class="layout-full-width" style="background-color:#FFFFFF;"><![endif]-->
+
+                                <!--[if (mso)|(IE)]><td align="center" width="720" style="background-color:#FFFFFF; width:720px; padding-right: 0px; padding-left: 0px; padding-top:10px; padding-bottom:10px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><![endif]-->
+                                <div class="col num12"
+                                    style="
+                      min-width: 320px;
+                      max-width: 720px;
+                      display: table-cell;
+                      vertical-align: top;
+                    ">
+                                    <div style="background-color: #ffffff; width: 100% !important">
+                                        <!--[if (!mso)&(!IE)]><!-->
+                                        <div
+                                            style="
+                          border-top: 0px solid transparent;
+                          border-left: 0px solid transparent;
+                          border-bottom: 0px solid transparent;
+                          border-right: 0px solid transparent;
+                          padding-top: 10px;
+                          padding-bottom: 10px;
+                          padding-right: 0px;
+                          padding-left: 0px;
+                        ">
+                                            <!--<![endif]-->
+                                            <center>
+                                                <img class="center fixedwidth" align="center" border="0"
+                                                    src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/Group_35236-removebg-preview.png"
+                                                    alt="Image" title="Image"
+                                                    style="
+                              outline: none;
+                              text-decoration: none;
+                              -ms-interpolation-mode: bicubic;
+                              clear: both;
+                              display: block !important;
+                              border: none;
+                              height: auto;
+                              float: none;
+                              width: 100%;
+                              max-width: 300px;
+                            "
+                                                    width="144" />
+                                            </center>
+                                            <br />
+                                            <br />
+                                            <br />
+                                            <div
+                                                style="
+                            position: absolute;
+                            width: 685px;
+                            height: 500px;
+                            top: 30px;
+                            left: 13px;
+                            position: relative;
+                            width: 700px;
+                            height: 750px;
+                            background-color: #f8f7f3;
+                            border-radius: 30px;
+                          ">
+                                                <div class="">
+                                                    <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 20px; padding-left: 20px; padding-top: 20px; padding-bottom: 20px;"><![endif]-->
+                                                    <div
+                                                        style="
+                                color: #555555;
+                                font-family: 'Open Sans', 'Helvetica Neue',
+                                  Helvetica, Arial, sans-serif;
+                                line-height: 180%;
+                                padding-right: 20px;
+                                padding-left: 20px;
+                                padding-top: 20px;
+                                padding-bottom: 20px;
+                              ">
+                                                        <div
+                                                            style="
+                                  line-height: 22px;
+                                  font-size: 12px;
+                                  color: #555555;
+                                  font-family: 'Open Sans', 'Helvetica Neue',
+                                    Helvetica, Arial, sans-serif;
+                                  text-align: left;
+                                ">
+                                                            <center>
+                                                                <p
+                                                                    style="
+                                      margin: 0;
+                                      font-size: 14px;
+                                      line-height: 25px;
+                                    ">
+                                                                    <span
+                                                                        style="line-height: 25px; font-size: 14px"><strong>Hai
+                                                                            {{ $username }},
+                                                                        </strong></span>
+                                                                </p>
+                                                            </center>
+                                                            <p
+                                                                style="
+                                    margin: 0;
+                                    font-size: 14px;
+                                    line-height: 25px;
+                                  ">
+                                                                <br />
+                                                            </p>
+                                                            <center>
+                                                                <p
+                                                                    style="
+                                      margin: 0;
+                                      font-size: 12px;
+                                      line-height: 22px;
+                                    ">
+                                                                    <span
+                                                                        style="
+                                        line-height: 25px;
+                                        top: 20px;
+                                        font-size: 14px;
+                                      "><br />Selamat
+                                                                        datang di HaloKak!
+                                                                        <br />Untuk melanjutkan pendaftaran
+                                                                        silahkan verifikasi email: {{ $email }}
+                                                                        bahwa ini benar anda <br />dengan klik
+                                                                        verifikasi berikut :</span>
+                                                                </p>
+                                                            </center>
+                                                            <center>
+                                                                <img class="center fixedwidth" align="center"
+                                                                    border="0"
+                                                                    src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/5640978-2960987-1.png"
+                                                                    alt="Image" title="Image"
+                                                                    style="
+                                      outline: none;
+                                      text-decoration: none;
+                                      -ms-interpolation-mode: bicubic;
+                                      clear: both;
+                                      display: block !important;
+                                      border: none;
+                                      height: auto;
+                                      float: none;
+                                      width: 100%;
+                                      max-width: 200px;
+                                    "
+                                                                    width="144" />
+                                                            </center>
+                                                            <br />
+                                                            <center>
+                                                                <a href="{{ $url }}" target="_blank"><button
+                                                                        class="gradient-uic">
+                                                                        <span class="button-color">Verifikasi</span>
+                                                                    </button></a>
+                                                            </center>
                                                         </div>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+                                                    <!--[if mso]></td></tr></table><![endif]-->
+                                                </div>
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                                                    class="divider"
+                                                    style="
+                              border-collapse: collapse;
+                              table-layout: fixed;
+                              border-spacing: 0;
+                              mso-table-lspace: 0pt;
+                              mso-table-rspace: 0pt;
+                              vertical-align: top;
+                              min-width: 100%;
+                              -ms-text-size-adjust: 100%;
+                              -webkit-text-size-adjust: 100%;
+                            ">
+                                                    <tbody>
+                                                        <tr style="vertical-align: top">
+                                                            <td class="divider_inner"
+                                                                style="
+                                    word-break: break-word;
+                                    border-collapse: collapse !important;
+                                    vertical-align: top;
+                                    padding-right: 10px;
+                                    padding-left: 10px;
+                                    padding-top: 10px;
+                                    padding-bottom: 10px;
+                                    min-width: 100%;
+                                    mso-line-height-rule: exactly;
+                                    -ms-text-size-adjust: 100%;
+                                    -webkit-text-size-adjust: 100%;
+                                  ">
+                                                                <table class="divider_content" height="0px"
+                                                                    align="center" border="0" cellpadding="0"
+                                                                    cellspacing="0" width="100%"
+                                                                    style="
+                                      border-collapse: collapse;
+                                      table-layout: fixed;
+                                      border-spacing: 0;
+                                      mso-table-lspace: 0pt;
+                                      mso-table-rspace: 0pt;
+                                      vertical-align: top;
+                                      border-top: 1px solid #bbbbbb;
+                                      -ms-text-size-adjust: 100%;
+                                      -webkit-text-size-adjust: 100%;
+                                    ">
+                                                                    <tbody>
+                                                                        <tr style="vertical-align: top">
+                                                                            <td
+                                                                                style="
+                                            word-break: break-word;
+                                            border-collapse: collapse !important;
+                                            vertical-align: top;
+                                            font-size: 0px;
+                                            line-height: 0px;
+                                            mso-line-height-rule: exactly;
+                                            -ms-text-size-adjust: 100%;
+                                            -webkit-text-size-adjust: 100%;
+                                          ">
+                                                                                <span>&#160;</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="">
+                                                    <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
+                                                    <div
+                                                        style="
+                                color: #555555;
+                                font-family: 'Open Sans', 'Helvetica Neue',
+                                  Helvetica, Arial, sans-serif;
+                                line-height: 150%;
+                                padding-right: 10px;
+                                padding-left: 10px;
+                                padding-top: 10px;
+                                padding-bottom: 10px;
+                              ">
+                                                        <div
+                                                            style="
+                                  font-size: 12px;
+                                  line-height: 18px;
+                                  font-family: 'Open Sans', 'Helvetica Neue',
+                                    Helvetica, Arial, sans-serif;
+                                  color: #555555;
+                                  text-align: left;
+                                ">
+                                                            <p
+                                                                style="
+                                    margin: 0;
+                                    font-size: 14px;
+                                    line-height: 21px;
+                                    text-align: center;
+                                  ">
+                                                                <span style="line-height: 18px; font-size: 15px">Anda
+                                                                    akan otomatis diarahkan kembali
+                                                                    pada</span>
+                                                            </p>
+                                                            <p
+                                                                style="
+                                    margin: 0;
+                                    font-size: 14px;
+                                    line-height: 21px;
+                                    text-align: center;
+                                  ">
+                                                                <span
+                                                                    style="line-height: 18px; font-size: 15px">Aplikasi
+                                                                    Halokak untuk melanjutkan
+                                                                    Login</span>
+                                                            </p>
+                                                            <br />
+                                                            <br />
+                                                            <p
+                                                                style="
+                                    margin: 0;
+                                    font-size: 14px;
+                                    line-height: 21px;
+                                    text-align: center;
+                                  ">
+                                                                <span
+                                                                    style="line-height: 18px; font-size: 15px">Terimakasih
+                                                                    <br />Jl. Laute 2 No.17,
+                                                                    Mandonga, Kec. Mandonga, Kota Kendari,
+                                                                    Sulawesi Tenggara 93111, Indonesia
+                                                                    <br />https://dev-user-halokak.betalogika.tech/
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
+                                                                    https://www.google.com/maps/@-3.9680494,122.5131314,3a,75y,320.2h,85.05t/data=!3m6!1e1!3m4!1s8ylUTeLKCnqVRLZ5-S1lPw!2e0!7i16384!8i8192?entry=ttu
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <!--[if mso]></td></tr></table><![endif]-->
+                                                </div>
+                                            </div>
+
+                                            <!--[if (!mso)&(!IE)]><!-->
+                                        </div>
+                                        <!--<![endif]-->
+                                    </div>
+                                </div>
+                                <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+                </td>
+            </tr>
+        </tbody>
     </table>
+    <!--[if (mso)|(IE)]></div><![endif]-->
 </body>
 
 </html>
