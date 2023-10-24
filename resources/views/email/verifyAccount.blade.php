@@ -522,7 +522,7 @@
                                     ">
                                                                     <span
                                                                         style="line-height: 25px; font-size: 14px"><strong>Hai
-                                                                            {{ $username }},
+                                                                            {{ $username }}!
                                                                         </strong></span>
                                                                 </p>
                                                             </center>
@@ -532,7 +532,6 @@
                                     font-size: 14px;
                                     line-height: 25px;
                                   ">
-                                                                <br />
                                                             </p>
                                                             <center>
                                                                 <p
