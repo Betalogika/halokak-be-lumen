@@ -6,13 +6,14 @@ use App\Models\Mentor;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProfileResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Models\verifyAccount as ModelVerify;
 use App\Mail\VerifyAccount as MailVerify;
-
-
+use App\Models\Profile;
+use App\Models\RoleModels;
 
 trait AuthMentorRepositories
 {
@@ -32,7 +33,18 @@ trait AuthMentorRepositories
         } else if ($user->role_id != 7) {
             $result = $this->response()->error('login ini khusus untuk mentor, dan anda bukan mentor');
         } else {
-            $result = $this->response()->ok(array('user' => $user, 'token' => $user->createToken('halokak')->accessToken), 'Succesfully Login');
+            $dataUser = array(
+                'id' => $user->id,
+                'username' => $user->username,
+                'email' => $user->email,
+                'status' => $user->verify == 'Y' ? 'aktif' : 'inactive',
+                'role' => RoleModels::whereId($user->role_id)->first(),
+                'profile' => Profile::whereusers_id($user->id)->first(),
+                'created_at' => $user->created_at,
+                'updated_at' => $user->updated_at,
+                'token' => $user->createToken('halokak')->accessToken,
+            );
+            $result = $this->response()->ok($dataUser, 'Succesfully Login');
         }
         return $result;
     }
@@ -60,5 +72,37 @@ trait AuthMentorRepositories
     public function logoutRepositories()
     {
         return Auth::guard('mentor')->user()->token()->delete();
+    }
+
+    public function profileRepositories()
+    {
+        if ($data = Profile::whereusers_id(Auth::guard('mentor')->user()->id)->first()) {
+            $profile = $this->response()->ok(new ProfileResource($data), 'Successfuly Data');
+        } else {
+            $profile = $this->response()->error('Profile Belum ada');
+        }
+        return $profile;
+    }
+
+    public function ProfileUpdateOrCreateRepositories($data)
+    {
+        DB::beginTransaction();
+        try {
+            if (isset($data['photo'])) {
+                $data['photo'] = $this->response()->imageToUrl($data['photo']); // upload foto real
+            } else {
+                $data['photo'] = 'https://alibabaspaces.betalogika.tech/img/imgdef.png'; //photo default if not upload real photos
+            }
+            $data['users_id'] = Auth::guard('mentor')->user()->id;
+            Profile::updateOrCreate(
+                ['users_id' => Auth::guard('mentor')->user()->id],
+                $data,
+            );
+            DB::commit();
+            return $this->response()->ok($data, 'Successfully Create Photo Profiles');
+        } catch (\Exception $errors) {
+            DB::rollBack();
+            return $this->response()->error($errors);
+        }
     }
 }

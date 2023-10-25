@@ -27,13 +27,15 @@ trait VerifyAndForgotPasswordRepositories
                 'id' => User::whereId($token->users_id)->first()->id,
                 'username' => User::whereId($token->users_id)->first()->username,
                 'email' => User::whereId($token->users_id)->first()->email,
-                'role_id' => RoleModels::whereId(User::whereId($token->users_id)->first()->role_id)->first(),
                 'verify' => User::whereId($token->users_id)->first()->verify == 'N' ? 'akun belum aktif' : 'akun sudah aktif',
+                'created_at' => User::whereId($token->users_id)->first()->created_at,
+                'updated_at' => User::whereId($token->users_id)->first()->updated_at,
+                'role' => RoleModels::whereId(User::whereId($token->users_id)->first()->role_id)->first(),
+                'token' => $token->token,
             );
-            $data = array('id' => $token->id, 'token' => $token->token, 'users' => $user);
-            $result = $this->response()->ok($data);
+            $result = $this->response()->ok($user);
         } catch (\Exception $error) {
-            $result = $this->response()->error('token salah', 500, $error);
+            $result = $this->response()->error('token salah atau token sudah kadaluarsa');
         }
         return $result;
     }
@@ -42,11 +44,11 @@ trait VerifyAndForgotPasswordRepositories
     {
         try {
             $token = ModelVerify::wheretoken($tokenURL)->first();
-            $user = User::whereId($token->users_id)->update(['verify' => 'Y']);
+            User::whereId($token->users_id)->update(['verify' => 'Y']);
             ModelVerify::wheretoken($tokenURL)->delete();  //after success verify and then delete token verify
-            $result = $this->response()->ok($user, 'Akun Anda Sudah Aktif silahkan lakukan login');
+            $result = $this->response()->ok(User::whereId($token->users_id)->first(), 'Akun Anda Sudah Aktif silahkan lakukan login');
         } catch (\Exception $error) {
-            $result = $this->response()->error('token salah', 500, $error);
+            $result = $this->response()->error('token salah atau token sudah kadaluarsa');
         }
         return $result;
     }
@@ -74,7 +76,7 @@ trait VerifyAndForgotPasswordRepositories
             forgotPasswords::wheretoken($tokenURL)->delete(); //after delete after success
             return $this->response()->ok($user, 'password berhasil di reset');
         } catch (\Exception $error) {
-            return $this->response()->error('token salah', 500, $error);
+            return $this->response()->error('token salah atau token sudah kadaluarsa');
         }
     }
 }

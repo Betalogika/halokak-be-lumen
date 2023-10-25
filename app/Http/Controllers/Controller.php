@@ -76,4 +76,14 @@ class Controller extends BaseController implements ResponseInterface
         $result['file'] = $file;
         return $result;
     }
+
+    public function pagination($request)
+    {
+        $limit = 20;
+        if ($limit >= $request->limit) {
+            $limit = $request->limit;
+        }
+
+        return $limit;
+    }
 }
