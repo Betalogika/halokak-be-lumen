@@ -24,9 +24,21 @@ trait AuthMentorRepositories
 
     public function loginRepositories($request)
     {
-        if (!$user = Mentor::whereemail($request->email)->first()) {
-            $result = $this->response()->error('Email salah');
-        } elseif (!Hash::check($request->password, $user->password)) {
+        if (strstr($request->umail, '@')) { // check apakah mentor login menggunakan email atau username
+            if ($email = Mentor::whereemail($request->umail)->first()) {
+                $user = $email;
+            } else {
+                return $this->response()->error('Email salah');
+            }
+        } else {
+            if ($username = Mentor::whereusername($request->umail)->first()) {
+                $user = $username;
+            } else {
+                return $this->response()->error('Username salah');
+            }
+        }
+
+        if (!Hash::check($request->password, $user->password)) { //ambil var user berdasarkan kondisi login yang dia(mentor) gunakan(email/password)
             $result = $this->response()->error('Password salah');
         } else if ($user->verify != 'Y') {
             $result = $this->response()->error('Akun Anda belum diverifikasi, silakan cek email atau hubungi Admin');
