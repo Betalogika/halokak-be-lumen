@@ -24,9 +24,21 @@ trait AuthUsersRepositories
 
     public function loginRepositories($request)
     {
-        if (!$user = User::whereemail($request->email)->first()) {
-            $result = $this->response()->error('Email salah');
-        } elseif (!Hash::check($request->password, $user->password)) {
+        if (strstr($request->umail, '@')) { // check apakah usernya login menggunakan email atau username
+            if ($email = User::whereemail($request->umail)->first()) {
+                $user = $email;
+            } else {
+                return $this->response()->error('Email salah');
+            }
+        } else {
+            if ($username = User::whereusername($request->umail)->first()) {
+                $user = $username;
+            } else {
+                return $this->response()->error('Username salah');
+            }
+        }
+
+        if (!Hash::check($request->password, $user->password)) {
             $result = $this->response()->error('Password salah');
         } else if ($user->verify != 'Y') {
             $result = $this->response()->error('Akun Anda belum diverifikasi, silakan cek email atau hubungi Admin');

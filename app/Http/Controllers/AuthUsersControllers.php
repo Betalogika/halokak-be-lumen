@@ -14,7 +14,7 @@ class AuthUsersControllers extends Controller implements UsersInterface
     public function login(Request $request)
     {
         $validatior = Validator::make($request->all(), [
-            'email' => 'required|email',
+            'umail' => 'required',
             'password' => 'required|string',
         ]);
 
