@@ -38,7 +38,7 @@ trait AuthUsersRepositories
             }
         }
 
-        if (!Hash::check($request->password, $user->password)) {
+        if (!Hash::check($request->password, $user->password)) { //ambil var user berdasarkan kondisi login yang dia gunakan(email/password)
             $result = $this->response()->error('Password salah');
         } else if ($user->verify != 'Y') {
             $result = $this->response()->error('Akun Anda belum diverifikasi, silakan cek email atau hubungi Admin');
