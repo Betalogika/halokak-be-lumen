@@ -25,13 +25,13 @@ trait AuthUsersRepositories
     public function loginRepositories($request)
     {
         if (!$user = User::whereemail($request->email)->first()) {
-            $result = $this->response()->error('email salah');
+            $result = $this->response()->error('Email salah');
         } elseif (!Hash::check($request->password, $user->password)) {
-            $result = $this->response()->error('password salah');
+            $result = $this->response()->error('Password salah');
         } else if ($user->verify != 'Y') {
-            $result = $this->response()->error('akun anda belum terverifikasi');
+            $result = $this->response()->error('Akun Anda belum diverifikasi, silakan cek email atau hubungi Admin');
         } else if ($user->role_id != 5) {
-            $result = $this->response()->error('login ini khusus untuk user, dan anda bukan user');
+            $result = $this->response()->error('Login ini khusus untuk user, dan anda bukan user');
         } else {
             $dataUser = array(
                 'id' => $user->id,
@@ -61,7 +61,7 @@ trait AuthUsersRepositories
             $url = ModelVerify::create(['token' => Str::random(64), 'users_id' => $user->id]); //send to link verify account via email
             DB::commit();
             Mail::to($user->email)->send(new MailVerify($user, $this->response()->urlVerify($url)));
-            $result = $this->response()->ok($user, 'Sucessfully Register Users');
+            $result = $this->response()->ok($user, 'Registrasi berhasil, silakan cek email untuk melanjutkan proses verifikasi');
         } catch (\Exception $error) {
             DB::rollBack();
             $result = $this->response()->error('kesalahan sistem', 500, $error);

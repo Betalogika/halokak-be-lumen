@@ -25,13 +25,13 @@ trait AuthMentorRepositories
     public function loginRepositories($request)
     {
         if (!$user = Mentor::whereemail($request->email)->first()) {
-            $result = $this->response()->error('email salah');
+            $result = $this->response()->error('Email salah');
         } elseif (!Hash::check($request->password, $user->password)) {
-            $result = $this->response()->error('password salah');
+            $result = $this->response()->error('Password salah');
         } else if ($user->verify != 'Y') {
-            $result = $this->response()->error('akun anda belum terverifikasi');
+            $result = $this->response()->error('Akun Anda belum diverifikasi, silakan cek email atau hubungi Admin');
         } else if ($user->role_id != 7) {
-            $result = $this->response()->error('login ini khusus untuk mentor, dan anda bukan mentor');
+            $result = $this->response()->error('Login ini khusus untuk mentor, dan anda bukan mentor');
         } else {
             $dataUser = array(
                 'id' => $user->id,
@@ -61,7 +61,7 @@ trait AuthMentorRepositories
             $url = ModelVerify::create(['token' => Str::random(64), 'users_id' => $mentor->id]); //send to link verify account via email
             DB::commit();
             Mail::to($mentor->email)->send(new MailVerify($mentor, $this->response()->urlVerify($url)));
-            $result = $this->response()->ok($mentor, 'Sucessfully Register Mentor');
+            $result = $this->response()->ok($mentor, 'Registrasi berhasil, silakan cek email untuk melanjutkan proses verifikasi');
         } catch (\Exception $error) {
             DB::rollBack();
             $result = $this->response()->error($error, 500);
