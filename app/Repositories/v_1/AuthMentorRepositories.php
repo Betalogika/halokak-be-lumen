@@ -24,18 +24,12 @@ trait AuthMentorRepositories
 
     public function loginRepositories($request)
     {
-        if (strstr($request->umail, '@')) { // check apakah mentor login menggunakan email atau username
-            if ($email = Mentor::whereemail($request->umail)->first()) {
-                $user = $email;
-            } else {
-                return $this->response()->error('Email salah');
-            }
+        if ($email = Mentor::whereemail($request->umail)->first()) { //cek email jika email benar maka login pakai email
+            $user = $email;
+        } elseif ($username = Mentor::whereusername($request->umail)->first()) { // akan tetapi jika email salah maka kemudian lanjut cek username dan jika username benar maka login pakai username
+            $user = $username;
         } else {
-            if ($username = Mentor::whereusername($request->umail)->first()) {
-                $user = $username;
-            } else {
-                return $this->response()->error('Username salah');
-            }
+            return $this->response()->error('email atau username salah');
         }
 
         if (!Hash::check($request->password, $user->password)) { //ambil var user berdasarkan kondisi login yang dia(mentor) gunakan(email/password)
