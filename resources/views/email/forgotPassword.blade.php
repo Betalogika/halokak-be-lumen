@@ -496,8 +496,7 @@
                                                     <div
                                                         style="
                                 color: #555555;
-                                font-family: 'Open Sans', 'Helvetica Neue',
-                                  Helvetica, Arial, sans-serif;
+                                font-family: 'Poppins-Italic', Helvetica;
                                 line-height: 180%;
                                 padding-right: 20px;
                                 padding-left: 20px;
@@ -509,19 +508,23 @@
                                   line-height: 22px;
                                   font-size: 12px;
                                   color: #555555;
-                                  font-family: 'Open Sans', 'Helvetica Neue',
-                                    Helvetica, Arial, sans-serif;
+                                  font-family: 'Poppins-Italic', Helvetica;
                                   text-align: left;
                                 ">
                                                             <center>
                                                                 <p
                                                                     style="
                                       margin: 0;
-                                      font-size: 14px;
+                                      font-size: 15px;
                                       line-height: 25px;
+                                      font-family: 'Poppins-Italic', Helvetica;
                                     ">
                                                                     <span
-                                                                        style="line-height: 25px; font-size: 14px"><strong>Hai
+                                                                        style="
+                                        line-height: 25px;
+                                        font-size: 15px;
+                                        font-family: 'Poppins-Italic', Helvetica;
+                                      "><strong>Hai
                                                                             {{ $username }}!
                                                                         </strong></span>
                                                                 </p>
@@ -529,22 +532,26 @@
                                                             <p
                                                                 style="
                                     margin: 0;
-                                    font-size: 14px;
+                                    font-size: 15px;
                                     line-height: 25px;
+                                    font-family: 'Poppins-Italic', Helvetica;
                                   ">
                                                             </p>
                                                             <center>
                                                                 <p
                                                                     style="
                                       margin: 0;
-                                      font-size: 12px;
+                                      font-size: 15px;
                                       line-height: 22px;
+                                      top: 10px;
+                                      font-family: 'Poppins-Italic', Helvetica;
                                     ">
                                                                     <span
                                                                         style="
-                                        line-height: 25px;
-                                        top: 20px;
-                                        font-size: 14px;
+                                        line-height: 20px;
+                                        top: 10px;
+                                        font-size: 15px;
+                                        font-family: 'Poppins-Italic', Helvetica;
                                       "><br />Lupa
                                                                         kata sandi anda?.<br />Untuk
                                                                         mengatur ulang kata sandi anda, klik
@@ -653,8 +660,7 @@
                                                     <div
                                                         style="
                                 color: #555555;
-                                font-family: 'Open Sans', 'Helvetica Neue',
-                                  Helvetica, Arial, sans-serif;
+                                font-family: 'Poppins-Italic', Helvetica;
                                 line-height: 150%;
                                 padding-right: 10px;
                                 padding-left: 10px;
@@ -665,31 +671,41 @@
                                                             style="
                                   font-size: 12px;
                                   line-height: 18px;
-                                  font-family: 'Open Sans', 'Helvetica Neue',
-                                    Helvetica, Arial, sans-serif;
+                                  font-family: 'Poppins-Italic', Helvetica;
                                   color: #555555;
                                   text-align: left;
                                 ">
                                                             <p
                                                                 style="
                                     margin: 0;
-                                    font-size: 14px;
+                                    font-size: 15px;
                                     line-height: 21px;
                                     text-align: center;
+                                    font-family: 'Poppins-Italic', Helvetica;
                                   ">
-                                                                <span style="line-height: 18px; font-size: 15px">Anda
+                                                                <span
+                                                                    style="
+                                      line-height: 18px;
+                                      font-size: 15px;
+                                      font-family: 'Poppins-Italic', Helvetica;
+                                    ">Anda
                                                                     akan otomatis diarahkan kembali
                                                                     pada</span>
                                                             </p>
                                                             <p
                                                                 style="
                                     margin: 0;
-                                    font-size: 14px;
+                                    font-size: 15px;
                                     line-height: 21px;
                                     text-align: center;
+                                    font-family: 'Poppins-Italic', Helvetica;
                                   ">
                                                                 <span
-                                                                    style="line-height: 18px; font-size: 15px">Aplikasi
+                                                                    style="
+                                      line-height: 18px;
+                                      font-size: 15px;
+                                      font-family: 'Poppins-Italic', Helvetica;
+                                    ">Aplikasi
                                                                     Halokak untuk melanjutkan
                                                                     Login</span>
                                                             </p>
@@ -698,12 +714,17 @@
                                                             <p
                                                                 style="
                                     margin: 0;
-                                    font-size: 14px;
+                                    font-size: 15px;
                                     line-height: 21px;
                                     text-align: center;
+                                    font-family: 'Poppins-Italic', Helvetica;
                                   ">
                                                                 <span
-                                                                    style="line-height: 18px; font-size: 15px">Terimakasih
+                                                                    style="
+                                      line-height: 18px;
+                                      font-size: 15px;
+                                      font-family: 'Poppins-Italic', Helvetica;
+                                    ">Terimakasih
                                                                     <br />Jl. Laute 2 No.17,
                                                                     Mandonga, Kec. Mandonga, Kota Kendari,
                                                                     Sulawesi Tenggara 93111, Indonesia
