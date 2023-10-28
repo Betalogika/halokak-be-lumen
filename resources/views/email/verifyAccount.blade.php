@@ -547,7 +547,7 @@
                                     ">
                                                                     <span
                                                                         style="
-                                        line-height: 25px;
+                                        line-height: 20px;
                                         top: 20px;
                                         font-size: 14px;
                                         font-family: 'Poppins-Italic', Helvetica;
@@ -683,7 +683,7 @@
                                                         <div
                                                             style="
                                   font-size: 12px;
-                                  line-height: 18px;
+                                  line-height: 20px;
                                   font-family: 'Poppins-Italic', Helvetica;
                                   color: #555555;
                                   text-align: left;
@@ -692,7 +692,7 @@
                                                                 style="
                                     margin: 0;
                                     font-size: 14px;
-                                    line-height: 21px;
+                                    line-height: 20px;
                                     text-align: center;
                                     font-family: 'Poppins-Italic', Helvetica;
                                   ">
