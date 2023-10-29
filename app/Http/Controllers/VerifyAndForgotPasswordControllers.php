@@ -26,6 +26,9 @@ class VerifyAndForgotPasswordControllers extends Controller implements VerifyAnd
     {
         $validate = Validator::make($request->all(), [
             'email' => 'email|required',
+        ], [
+            'required' => 'Email wajib di isi',
+            'email' => 'Penulisan email tidak benar'
         ]);
 
         if ($validate->fails()) {
@@ -40,8 +43,10 @@ class VerifyAndForgotPasswordControllers extends Controller implements VerifyAnd
     {
         $validate = Validator::make($request->all(), [
             'email' => 'email|required',
-            'password_lama' => 'required',
-            'password_baru' => 'required',
+            'password' => 'required|confirmed',
+        ], [
+            'email' => 'penulisan email tidak benar',
+            'confirmed' => 'password tidak sama',
         ]);
         if ($validate->fails()) {
             $result = $this->customError($validate->errors());
