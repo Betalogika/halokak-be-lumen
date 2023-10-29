@@ -563,7 +563,7 @@
                                                             <center>
                                                                 <img class="center fixedwidth" align="center"
                                                                     border="0"
-                                                                    src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/5640978-2960987-1.png"
+                                                                    src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/20547283_6310505%201.png"
                                                                     alt="Image" title="Image"
                                                                     style="
                                       outline: none;
