@@ -24,14 +24,26 @@ trait AuthMentorRepositories
 
     public function loginRepositories($request)
     {
-        if (!$user = Mentor::whereemail($request->email)->first()) {
-            $result = $this->response()->error('email salah');
-        } elseif (!Hash::check($request->password, $user->password)) {
-            $result = $this->response()->error('password salah');
+        if (strstr($request->umail, '@')) { // check apakah mentor login menggunakan email atau username
+            if ($email = Mentor::whereemail($request->umail)->first()) {
+                $user = $email;
+            } else {
+                return $this->response()->error('Email salah');
+            }
+        } else {
+            if ($username = Mentor::whereusername($request->umail)->first()) {
+                $user = $username;
+            } else {
+                return $this->response()->error('Username salah');
+            }
+        }
+
+        if (!Hash::check($request->password, $user->password)) { //ambil var user berdasarkan kondisi login yang dia(mentor) gunakan(email/password)
+            $result = $this->response()->error('Password salah');
         } else if ($user->verify != 'Y') {
-            $result = $this->response()->error('akun anda belum terverifikasi');
+            $result = $this->response()->error('Akun Anda belum diverifikasi, silakan cek email atau hubungi Admin');
         } else if ($user->role_id != 7) {
-            $result = $this->response()->error('login ini khusus untuk mentor, dan anda bukan mentor');
+            $result = $this->response()->error('Login ini khusus untuk mentor, dan anda bukan mentor');
         } else {
             $dataUser = array(
                 'id' => $user->id,
@@ -61,7 +73,7 @@ trait AuthMentorRepositories
             $url = ModelVerify::create(['token' => Str::random(64), 'users_id' => $mentor->id]); //send to link verify account via email
             DB::commit();
             Mail::to($mentor->email)->send(new MailVerify($mentor, $this->response()->urlVerify($url)));
-            $result = $this->response()->ok($mentor, 'Sucessfully Register Mentor');
+            $result = $this->response()->ok($mentor, 'Registrasi berhasil, silakan cek email untuk melanjutkan proses verifikasi');
         } catch (\Exception $error) {
             DB::rollBack();
             $result = $this->response()->error($error, 500);
