@@ -23,6 +23,7 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api/v1'], function () use ($router) {
     //route API verify and forgot
     $router->get('/verify/{tokenURL}/check', 'VerifyAndForgotPasswordControllers@checkVerify');
+    $router->get('/forgot/{tokenURL}/check', 'VerifyAndForgotPasswordControllers@checkForgot');
     $router->post('/forgot/password', 'VerifyAndForgotPasswordControllers@forgotPassword');
     $router->post('/change/{tokenURL}/password', 'VerifyAndForgotPasswordControllers@changePassword');
     $router->post('/verify/{tokenURL}/account', 'VerifyAndForgotPasswordControllers@verifyUsers');

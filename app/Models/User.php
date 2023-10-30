@@ -40,4 +40,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasOne(Profile::class, 'users_id');
     }
+
+    public function checkVerifyForgotPass()
+    {
+        return $this->hasOne(forgotPasswords::class, 'users_id');
+    }
+
+    public function checkVerifyAccount()
+    {
+        return $this->hasOne(verifyAccount::class, 'users_id');
+    }
 }

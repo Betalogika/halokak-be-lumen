@@ -16,6 +16,11 @@ class VerifyAndForgotPasswordControllers extends Controller implements VerifyAnd
         return $this->checkVerifyRepositories($tokenURL);
     }
 
+    public function checkForgot($tokenURL)
+    {
+        return $this->checkForgotRepositories($tokenURL);
+    }
+
     public function verifyUsers($tokenURL)
     {
         return $this->verifyUsersRepositories($tokenURL);
