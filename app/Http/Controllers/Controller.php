@@ -49,6 +49,11 @@ class Controller extends BaseController implements ResponseInterface
         return config('url.halokak_verify_forgot') . '/auth/verify/' . $url->token . '/account';
     }
 
+    public function urlLogin()
+    {
+        return config('url.halokak_dev');
+    }
+
     public function uploadBase64($image, $prefix = '/')
     {
         $slug = time() . Str::random(16); //name prefix

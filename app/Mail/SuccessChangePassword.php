@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ForgotPassword extends Mailable
+class SuccessChangePassword extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,9 +31,9 @@ class ForgotPassword extends Mailable
      */
     public function build()
     {
-        return $this->view('email.forgotPassword')->with([
+        return $this->view('email.successChangePassword')->with([
             'username' => $this->username,
-            'url' => $this->url
-        ])->subject('Reset Password Account');
+            'url' => $this->url,
+        ])->subject('Success Reset Password Account');
     }
 }

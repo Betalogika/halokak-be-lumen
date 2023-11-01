@@ -45,7 +45,7 @@
             background: #6ac8d2;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
             border-radius: 80px;
-            width: 101px;
+            width: 120px;
             height: 30px;
             border-style: none;
             padding: 5px;
@@ -515,14 +515,14 @@
                                                                 <p
                                                                     style="
                                       margin: 0;
-                                      font-size: 14px;
+                                      font-size: 15px;
                                       line-height: 25px;
                                       font-family: 'Poppins-Italic', Helvetica;
                                     ">
                                                                     <span
                                                                         style="
                                         line-height: 25px;
-                                        font-size: 14px;
+                                        font-size: 15px;
                                         font-family: 'Poppins-Italic', Helvetica;
                                       "><strong>Hai
                                                                             {{ $username }}!
@@ -532,7 +532,7 @@
                                                             <p
                                                                 style="
                                     margin: 0;
-                                    font-size: 14px;
+                                    font-size: 15px;
                                     line-height: 25px;
                                     font-family: 'Poppins-Italic', Helvetica;
                                   ">
@@ -541,42 +541,29 @@
                                                                 <p
                                                                     style="
                                       margin: 0;
-                                      font-size: 12px;
+                                      font-size: 15px;
                                       line-height: 22px;
+                                      top: 10px;
                                       font-family: 'Poppins-Italic', Helvetica;
                                     ">
                                                                     <span
                                                                         style="
                                         line-height: 20px;
-                                        top: 20px;
-                                        font-size: 14px;
+                                        top: 10px;
+                                        font-size: 15px;
                                         font-family: 'Poppins-Italic', Helvetica;
-                                      "><br />Selamat
-                                                                        datang di <b>HaloKak!</b>
-                                                                        <br />Untuk melanjutkan pendaftaran
-                                                                        silahkan verifikasi email: {{ $email }}
-                                                                        bahwa ini benar anda <br />dengan
-                                                                        <b>klik verifikasi</b> berikut :</span>
+                                      "><br />Selamat!<br />Password
+                                                                        anda telah
+                                                                        dirubah, selanjutnya klik tombol login
+                                                                        dibawah ini<br />untuk melanjutkan ke
+                                                                        aplikasi halokak</span>
                                                                 </p>
-                                                                <br />
-                                                                <i>
-                                                                    <p
-                                                                        style="
-                                        margin: 0;
-                                        font-size: 12px;
-                                        line-height: 22px;
-                                        font-family: 'Poppins-Italic', Helvetica;
-                                      ">
-                                                                        Pastikan untuk melanjutkan verifikasi Anda
-                                                                        dalam waktu 3 hari atau tautannya akan
-                                                                        expired.
-                                                                    </p>
-                                                                </i>
                                                             </center>
+                                                            <br />
                                                             <center>
                                                                 <img class="center fixedwidth" align="center"
                                                                     border="0"
-                                                                    src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/5640978-2960987-1.png"
+                                                                    src="https://alibabaspaces.betalogika.tech/assets/emailverify/img/icon-park-solid_check-correct.png"
                                                                     alt="Image" title="Image"
                                                                     style="
                                       outline: none;
@@ -587,7 +574,7 @@
                                       border: none;
                                       height: auto;
                                       float: none;
-                                      width: 100%;
+                                      width: 120px;
                                       max-width: 200px;
                                     "
                                                                     width="144" />
@@ -596,7 +583,7 @@
                                                             <center>
                                                                 <a href="{{ $url }}" target="_blank"><button
                                                                         class="gradient-uic">
-                                                                        <span class="button-color">Verifikasi</span>
+                                                                        <span class="button-color">Login</span>
                                                                     </button></a>
                                                             </center>
                                                         </div>
@@ -683,7 +670,7 @@
                                                         <div
                                                             style="
                                   font-size: 12px;
-                                  line-height: 20px;
+                                  line-height: 18px;
                                   font-family: 'Poppins-Italic', Helvetica;
                                   color: #555555;
                                   text-align: left;
@@ -691,8 +678,8 @@
                                                             <p
                                                                 style="
                                     margin: 0;
-                                    font-size: 14px;
-                                    line-height: 20px;
+                                    font-size: 15px;
+                                    line-height: 21px;
                                     text-align: center;
                                     font-family: 'Poppins-Italic', Helvetica;
                                   ">
@@ -708,7 +695,7 @@
                                                             <p
                                                                 style="
                                     margin: 0;
-                                    font-size: 14px;
+                                    font-size: 15px;
                                     line-height: 21px;
                                     text-align: center;
                                     font-family: 'Poppins-Italic', Helvetica;
@@ -727,7 +714,7 @@
                                                             <p
                                                                 style="
                                     margin: 0;
-                                    font-size: 14px;
+                                    font-size: 15px;
                                     line-height: 21px;
                                     text-align: center;
                                     font-family: 'Poppins-Italic', Helvetica;
