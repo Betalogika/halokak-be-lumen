@@ -33,6 +33,6 @@ class Admin extends Model implements AuthenticatableContract, AuthorizableContra
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password', 'role_id',
     ];
 }
