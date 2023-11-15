@@ -108,10 +108,9 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
         });
 
         $router->group(['middleware' => ['auth:admin', 'admin']], function () use ($router) {
-            $router->group(['prefix' => 'fitur-admin'], function () use ($router) {
-                $router->post('/', function () {
-                    return 'welcome feat admin';
-                });
+            $router->group(['prefix' => 'profile'], function () use ($router) {
+                $router->get('/', 'AuthAdminControllers@profile');
+                $router->post('/', 'AuthAdminControllers@updateOrCreateProfile');
             });
         });
     });
