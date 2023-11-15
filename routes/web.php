@@ -101,7 +101,6 @@ $router->group(['prefix' => 'api/v1'], function () use ($router) {
     $router->group(['prefix' => 'admin', 'namespace' => 'Admin'], function () use ($router) {
         $router->group(['prefix' => 'auth'], function () use ($router) {
             $router->post('login', 'AuthAdminControllers@login');
-            $router->post('register', 'AuthAdminControllers@register');
             $router->group(['prefix' => 'logout', 'middleware' => ['auth:admin', 'admin']], function () use ($router) {
                 $router->post('/', 'AuthAdminControllers@logout');
             });

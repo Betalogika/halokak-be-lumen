@@ -15,7 +15,7 @@ class AuthAdminControllers extends Controller implements AdminInterface
     public function login(Request $request)
     {
         $validatior = Validator::make($request->all(), [
-            'email' => 'required|email',
+            'umail' => 'required',
             'password' => 'required|string',
         ]);
 
@@ -23,22 +23,6 @@ class AuthAdminControllers extends Controller implements AdminInterface
             $result = $this->customError($validatior->errors());
         } else {
             $result = $this->loginRepositories($request);
-        }
-        return $result;
-    }
-
-    public function register(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'username' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed',
-        ]);
-
-        if ($validator->fails()) {
-            $result = $this->customError($validator->errors());
-        } else {
-            $result = $this->registerRepositories($request);
         }
         return $result;
     }
