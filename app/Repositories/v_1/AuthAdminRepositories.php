@@ -6,7 +6,6 @@ use App\Models\Admin;
 use App\Models\Profile;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Profile;
 use App\Models\RoleModels;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
