@@ -17,9 +17,9 @@ class Controller extends BaseController implements ResponseInterface
         return response()->json(['message' => $message, 'data' => $data], $statusCode);
     }
 
-    public function error(string $message = 'Errors Data', int $statusCode = 422, String $data = '')
+    public function error(string $message = 'Errors Data', int $statusCode = 422)
     {
-        return response()->json(['message' => $message, 'data' => $data], $statusCode);
+        return response()->json(['message' => $message], $statusCode);
     }
 
     public function customError($data)
