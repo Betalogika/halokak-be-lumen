@@ -84,7 +84,12 @@ trait MenteeRepositories
             ])->first()) {
                 return $this->response()->error('mentor tidak ditemukan');
             } else {
-                if (!$userProfile = Profile::whereusers_id(Auth::guard('user')->user()->id)->first()) return $this->response()->error('profile belum ada');
+                //jika sudah punya profile maka name nya dari nama lengkap akan tetapi jika belum punya profile maka name nya dari username
+                if (!$userProfile = Profile::whereusers_id(Auth::guard('user')->user()->id)->first()) {
+                    $nameUserProfile = Auth::guard('user')->user()->username;
+                } else {
+                    $nameUserProfile = $userProfile->nama_lengkap;
+                }
                 // check if sudah hubungi mentor sebelumnya maka pake room sebelumnya
                 // akan tetapi jika belum maka create room baru
                 if ($mentee = Mentorship::where([
@@ -104,13 +109,13 @@ trait MenteeRepositories
                         'code' => $code,
                         'status' => 'active',
                         'mentor' => array('id' => $mentor->id, 'name' => $mentor->username),
-                        'mentee' => array('id' => Auth::guard('user')->user()->id, 'name' => $userProfile->nama_lengkap),
+                        'mentee' => array('id' => Auth::guard('user')->user()->id, 'name' => $nameUserProfile),
                     ]
                 );
                 $room['message'] = MessageRoomMentee::create([
                     'message' => $request->message,
                     'code' => $room->code,
-                    'mentee' => array('id' => Auth::guard('user')->user()->id, 'nama' => $userProfile->nama_lengkap),
+                    'mentee' => array('id' => Auth::guard('user')->user()->id, 'nama' => $nameUserProfile),
                 ]);
                 DB::commit();
                 return $this->response()->ok($room, 'Successfully Data');
