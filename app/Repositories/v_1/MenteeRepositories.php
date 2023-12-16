@@ -39,6 +39,10 @@ trait MenteeRepositories
                 return $query->where('desc', 'like', "%{$request->desc}%");
             })->when($request->status, function ($query) use ($request) {
                 return $query->where('status', 'like', "%{$request->status}%");
+            })->when($request->mentor_user_id, function ($query) use ($request) {
+                return $query->where('mentor.id', $request->mentor_user_id);
+            })->when($request->created_at, function ($query) use ($request) {
+                return $query->where('created_at', 'LIKE', "%{$request->created_at}%");
             })
             ->orderByDesc('_id')
             ->paginate($this->response()->pagination($request));
